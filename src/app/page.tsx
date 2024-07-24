@@ -27,14 +27,18 @@ export default function Home() {
   const [cameraState, setCameraState] = useState(3);
 
   const items = [
-    { id: "item1", name: "Item 1",
+    {
+      id: "item1",
+      name: "Item 1",
       title: "Smart airports enable seamless journeys",
       sub: "Enhance airport planning and real-time operations through spatial AI",
     },
-    { id: "item2", name: "Item 2",
+    {
+      id: "item2",
+      name: "Item 2",
       title: "Upgrade retail with spatial insights",
       sub: "Extract shopper behaviour in physical space and amplify retail performance",
-     },
+    },
     {
       id: "item3",
       name: "Item 3",
@@ -43,7 +47,7 @@ export default function Home() {
     },
   ];
 
-  const handleClick = (id) => {
+  const handleClick = (id: string)  => {
     if (id === "item1") {
       setCameraState(1);
     } else if (id === "item2") {
@@ -92,8 +96,8 @@ export default function Home() {
       </section>
       <div className="absolute z-30 bottom-0   w-full flex flex-row  justify-between ">
         <div className="p-8">
-          <h1 className="font-bold text-xl">{items[cameraState-1].title}</h1>
-          <h3>{items[cameraState-1].sub}</h3>
+          <h1 className="font-bold text-xl">{items[cameraState - 1].title}</h1>
+          <h3>{items[cameraState - 1].sub}</h3>
         </div>
         <div className="flex flex-col px-8 gap-2">
           <ButtonList />
