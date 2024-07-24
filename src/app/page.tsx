@@ -80,7 +80,7 @@ export default function Home() {
   };
 
   return (
-    <main className="  h-screen w-screen relative">
+    <main className="h-screen w-screen relative">
       <section className="absolute top-0 z-30 w-full flex justify-between pt-2 px-5">
         <div>
           <h2 className="font-bold">TMT</h2>
