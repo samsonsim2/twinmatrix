@@ -12,78 +12,78 @@ import {
     OrbitControls,
     OrthographicCamera,
     PerspectiveCamera,
-  } from "@react-three/drei";
+} from "@react-three/drei";
 import { useGSAP } from '@gsap/react';
 import gsap from "gsap";
-export default function Set({cameraState} ) {
+export default function Set({ cameraState }) {
     const cameraRef = useRef(null);
     const mesh = useRef(); const navigateAirport = () => {
         gsap.to(mesh.current.position, {
-          z: 10, // 45 degrees in radians
-          duration: 2,
-          ease: "power1.inOut",
+            z: 10, // 45 degrees in radians
+            duration: 2,
+            ease: "power1.inOut",
         });
         gsap.to(mesh.current.scale, {
-          x: 2,
-          y: 2,
-          z: 2, // 45 degrees in radians
-          duration: 2,
-          ease: "power1.inOut",
+            x: 2,
+            y: 2,
+            z: 2, // 45 degrees in radians
+            duration: 2,
+            ease: "power1.inOut",
         });
-      };
-    
-      const navigateRetail = () => {
-        gsap.to(mesh.current.position, {
-          x: -10,
-          z: -2, // 45 degrees in radians
-          duration: 2,
-          ease: "power1.inOut",
-        });
-        gsap.to(mesh.current.scale, {
-          x: 2,
-          y: 2,
-          z: 2, // 45 degrees in radians
-          duration: 2,
-          ease: "power1.inOut",
-        });
-      };
-    
-      const navigateHome = () => {
-        gsap.to(mesh.current.position, {
-          x: 0,
-          z: 0, // 45 degrees in radians
-          duration: 2,
-          ease: "power1.inOut",
-        });
-        gsap.to(mesh.current.scale, {
-          x: 1,
-          y: 1,
-          z: 1, // 45 degrees in radians
-          duration: 2,
-          ease: "power1.inOut",
-        });
-      };
-    
-       
-      useEffect(()=>{
-        if (cameraState === 1) {
-          navigateAirport()
-          } else if (cameraState === 2) {
-          navigateRetail()
-          } else {
-            navigateHome()
-          }
+    };
 
-      },[cameraState])
-     
-    
-     
-    
-      const items = [
+    const navigateRetail = () => {
+        gsap.to(mesh.current.position, {
+            x: -10,
+            z: -2, // 45 degrees in radians
+            duration: 2,
+            ease: "power1.inOut",
+        });
+        gsap.to(mesh.current.scale, {
+            x: 2,
+            y: 2,
+            z: 2, // 45 degrees in radians
+            duration: 2,
+            ease: "power1.inOut",
+        });
+    };
+
+    const navigateHome = () => {
+        gsap.to(mesh.current.position, {
+            x: 0,
+            z: 0, // 45 degrees in radians
+            duration: 2,
+            ease: "power1.inOut",
+        });
+        gsap.to(mesh.current.scale, {
+            x: 1,
+            y: 1,
+            z: 1, // 45 degrees in radians
+            duration: 2,
+            ease: "power1.inOut",
+        });
+    };
+
+
+    useEffect(() => {
+        if (cameraState === 1) {
+            navigateAirport()
+        } else if (cameraState === 2) {
+            navigateRetail()
+        } else {
+            navigateHome()
+        }
+
+    }, [cameraState])
+
+
+
+
+    const items = [
         { id: "item1", name: "Item 1" },
         { id: "item2", name: "Item 2" },
         { id: "item3", name: "Item 3" },
-      ];
+    ];
 
     useGSAP(() => {
         gsap.to(mesh.current.rotation, {
@@ -113,7 +113,7 @@ export default function Set({cameraState} ) {
             scale={1}
         />
 
-        <mesh ref={mesh} position={[0, 0, -2]}>
+        <mesh ref={mesh} position={[0, 0, 0]}>
             <Platforms />
             <Buildings />
             <Icons />
