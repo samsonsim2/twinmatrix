@@ -8,12 +8,12 @@ export default function Test(props) {
   const facadeMaterial= <meshStandardMaterial color="red" side={DoubleSide}/>
   return (
     <group {...props} dispose={null} scale={0.008}>
-      <mesh
+      {/* <mesh
         castShadow
         receiveShadow
         geometry={nodes.Facade.geometry}
         material={facadeMaterial}
-      >  <meshStandardMaterial color={"#f9f9f9"}  opacity={0.5} transparent={true}/></mesh>
+      >  <meshStandardMaterial color={"#f9f9f9"}  opacity={0.5} transparent={true}/></mesh> */}
       <mesh
         castShadow
         receiveShadow
