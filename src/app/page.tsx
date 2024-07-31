@@ -125,10 +125,7 @@ export default function Home() {
       <div className="h-full w-full">
         <Canvas gl={{ antialias: true, toneMapping: THREE.NoToneMapping }}>
           {/* Your regular scene contents go here, like always ... */}
-      <EffectComposer>
-        
- 
-      </EffectComposer>
+       
           <ambientLight intensity={2.2} />
           <directionalLight position={[1.0, 2.0, 0.0]} />
 
