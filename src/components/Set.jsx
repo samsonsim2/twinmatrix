@@ -5,13 +5,21 @@ import Icons from "@/components/Icons";
 import Lines from "@/components/Lines";
 import Heatmap from "@/components/Heatmap";
 import Circulation from "@/components/Circulation";
+import Grass from "@/components/Grass";
+import Roads from "@/components/Roads";
+import Test2 from "@/components/Test2";
+import Collaboration from "@/components/Collaboration";
+import Heatmap2 from "@/components/Heatmap2";
+import Data from "@/components/Data";
 import React, { useEffect, useMemo, useRef } from 'react'
+
 import { useFrame } from "@react-three/fiber";
 import {
     MeshPortalMaterial,
     OrbitControls,
     OrthographicCamera,
     PerspectiveCamera,
+    SpriteAnimator,
 } from "@react-three/drei";
 import { useGSAP } from '@gsap/react';
 import gsap from "gsap";
@@ -98,12 +106,13 @@ export default function Set({ cameraState }) {
     }, { scope: mesh });
 
     return <>
-        <OrbitControls />
+        <OrbitControls enableZoom={false} enablePan={false} enableOrbit={false} />
 
         <OrthographicCamera
             ref={cameraRef}
             name="Camera"
             makeDefault={true}
+            enable
             zoom={50}
             far={100000}
             near={-100000}
@@ -114,13 +123,70 @@ export default function Set({ cameraState }) {
         />
 
         <mesh ref={mesh} position={[0, 0, 0]}>
+            {/* <Roads/> */}
             <Platforms />
             <Buildings />
-            <Icons />
-            <Heatmap />
-            <Lines />
+            {/* <Icons /> */}
+            {/* <Heatmap /> */}
+            <Heatmap2/>
+            <Data/>
+            <Test2 />
+            {/* <Lines /> */}
             <Circulation />
-            <Test />
+            <Grass />
+            <Collaboration />
+            {/* <Test /> */}
+            <SpriteAnimator
+                position={[0.0, 2.4, 0.0]}
+                scale={0.5}
+
+                startFrame={0}
+                scaleFactor={0.01}
+                autoPlay={true}
+                loop={true}
+                numberOfFrames={1}
+                textureImageURL={'/textures/Location.png'}
+
+            />
+{/* 
+            <SpriteAnimator
+                position={[0.0, 2.4, 4.0]}
+                scale={0.7}
+
+                startFrame={0}
+                scaleFactor={0.01}
+                autoPlay={true}
+                loop={true}
+                numberOfFrames={1}
+                textureImageURL={'/textures/graph1.png'}
+
+            />
+
+            <SpriteAnimator
+                position={[5.0, 2.4, 4.0]}
+                scale={0.3}
+
+                startFrame={0}
+                scaleFactor={0.01}
+                autoPlay={true}
+                loop={true}
+                numberOfFrames={1}
+                textureImageURL={'/textures/graph2.png'}
+
+            />
+
+<SpriteAnimator
+                position={[-8.0, 2.0, 0.5]}
+                scale={0.5}
+
+                startFrame={0}
+                scaleFactor={0.01}
+                autoPlay={true}
+                loop={true}
+                numberOfFrames={1}
+                textureImageURL={'/textures/graph3.png'}
+
+            /> */}
         </mesh>
 
     </>

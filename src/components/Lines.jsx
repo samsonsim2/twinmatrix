@@ -9,12 +9,12 @@ uniform float u_time;
  
  
 void main() {
-  vec3 blue = vec3(0.7, 0.8, 1.0);   
-  float speed = 10.0;
+  vec3 blue = vec3(0,0, 1);   
+  float speed = 6.0;
   float sinWave = step(0.5,abs(sin(vUvs.x * 80.0 + (u_time * speed)) - 1.)) ;
   vec3 color = vec3(sinWave) * blue;
   
-  gl_FragColor = vec4(color, sinWave);
+  gl_FragColor = vec4(color, sinWave*0.2);
 }
 
 `;

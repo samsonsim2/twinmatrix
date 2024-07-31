@@ -1,7 +1,7 @@
 import React, { useMemo, useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
-
+import { DoubleSide } from 'three'
 const fragmentShader = `
 
 vec3 hash( vec3 p ) // replace this by something better
@@ -64,7 +64,7 @@ void main(void) {
     vec3 blue = vec3(0.0, 0.0, 1.0);
     vec3 yellow = vec3(1.0, 1.0, 0.0);
 
-    vec3 coords = vec3(vUvs * 10.0, u_time * 1.0); 
+    vec3 coords = vec3(vUvs * 10.0, u_time * 0.4); 
     float noiseSample = 0.0;
     noiseSample = map(fbm(coords, 16, 0.5, 1.0),-1.0, 1.0, 0.0, 1.0 );    
     noiseSample = smoothstep(0.4,0.55,noiseSample);
@@ -72,8 +72,8 @@ void main(void) {
 
     float level = (noiseSample * 1.5) * 3.14159265 / 2.0;
     vec3 col;
-    col.r = sin(level);
-    col.g = sin(level * 1.5);
+    col.r = sin(level );
+    col.g = sin(level * 2.0);
     col.b = cos(level * 2.0);
  
     gl_FragColor = vec4(col, 0.8 );
@@ -88,33 +88,42 @@ void main() {
     vUvs = uv;
 }
 `
-export default function Heatmap(props) {
-    const { nodes, materials } = useGLTF('/models/Heatmap.gltf')
-    const mesh = useRef();
-    const uniforms = useMemo(
-        () => ({
-            u_time: {
-                value: 0.0,
-            },
+ 
+export default function Test2(props) {
+  const { nodes, materials } = useGLTF('/models/Test2.gltf')
+  const mesh = useRef();
+  const uniforms = useMemo(
+      () => ({
+          u_time: {
+              value: 0.0,
+          },
 
-        }), []
-    );
-    useFrame((state) => {
-        const { clock } = state;
-        mesh.current.material.uniforms.u_time.value = clock.getElapsedTime();
-    });
-    return (
-        <group {...props} dispose={null}>
-            <mesh
-                ref={mesh}
-                scale={0.008}
-                castShadow
-                receiveShadow
-                geometry={nodes.Heatmap.geometry}
-
-            ><shaderMaterial fragmentShader={fragmentShader} vertexShader={vertexShader} uniforms={uniforms} transparent={true}  /></mesh>
-        </group>
-    )
+      }), []
+  );
+  useFrame((state) => {
+      const { clock } = state;
+      mesh.current.material.uniforms.u_time.value = clock.getElapsedTime();
+  });
+  return (
+    <group {...props} dispose={null} scale={0.008}  >
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Building.geometry}
+        material={nodes.Building.material}
+        position={[0, 10, 0]}
+      > <meshStandardMaterial color={"white"} transparent={true} opacity={1}/></mesh>
+      <mesh ref={mesh}
+        castShadow
+        receiveShadow
+        geometry={nodes.Floor.geometry}
+        material={nodes.Floor.material}
+        position={[0, 10, 0]}
+      > 
+      <shaderMaterial fragmentShader={fragmentShader} vertexShader={vertexShader} uniforms={uniforms} transparent={true} side={DoubleSide}/>
+       </mesh>
+    </group>
+  )
 }
 
-useGLTF.preload('/models/Heatmap.gltf')
+useGLTF.preload('/models/Test2.gltf')

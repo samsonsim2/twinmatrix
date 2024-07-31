@@ -20,7 +20,7 @@ export default function Test(props) {
         geometry={nodes.Beams_and_Column.geometry}
          
         position={[18.998, 16.229, 503.332]}
-       > <meshStandardMaterial color={"#1F51FF"} side={DoubleSide}/></mesh>
+       > <meshStandardMaterial color={"yellow"} side={DoubleSide}/></mesh>
     </group>
   )
 }
