@@ -52,7 +52,7 @@ export default function Home() {
     {
       id: "item3",
       name: "Item 3",
-      title: "The future of cities is spatial-driven",
+      title: "The future of cities is spatial-driven.",
       sub: "Cities are becoming driven by smart, interconnected, spatial layers",
     },
   ];
