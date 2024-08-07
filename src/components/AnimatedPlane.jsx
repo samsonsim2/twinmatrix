@@ -17,7 +17,7 @@ export default function AnimatedPlane(props) {
     actions[names[0]].reset().fadeIn(0.5).play()
   },[])
   return (
-    <group ref={group} {...props} dispose={null}   scale={0.25}  position={[-0.9,0,-8.3]} >
+    <group ref={group} {...props} dispose={null}   scale={0.25}  position={[-0.9,0.1,-8.3]} >
       <group    >
         <mesh
           name="AnimatedPlane"

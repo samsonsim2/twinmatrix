@@ -9,6 +9,7 @@ export default function Planes(props) {
         castShadow
         receiveShadow
         geometry={nodes.Planes.geometry}
+        position={[0,0.1,0]}
         material={nodes.Planes.material}
         scale={0.25}
       ><meshStandardMaterial color={"white"}/></mesh>

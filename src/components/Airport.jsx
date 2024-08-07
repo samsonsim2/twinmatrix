@@ -37,14 +37,14 @@ export default function Airport({props,cameraState}) {
 
 }, [cameraState])
   return (
-    <group {...props} dispose={null} scale={0.25}>
+    <group {...props} dispose={null} scale={0.25} position={[0,0.1,0]}>
       <mesh
        ref={mesh}
         castShadow
         receiveShadow
         geometry={nodes.Airport_1.geometry}
         material={nodes.Airport_1.material}
-        position={[0,0,0]}
+        
       > <meshStandardMaterial color={"white"} transparent={true} opacity={0.9} /></mesh>
       <mesh
         castShadow

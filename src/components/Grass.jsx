@@ -5,7 +5,7 @@ export default function Grass(props) {
   const { nodes, materials } = useGLTF('/models/Grass.gltf')
   return (
     <group {...props} dispose={null} scale={0.25}>
-    <group position={[0, 0.804, 0]}>
+    <group position={[0, 1, 0]}>
       <mesh
         castShadow
         receiveShadow

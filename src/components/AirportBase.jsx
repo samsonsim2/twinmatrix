@@ -11,7 +11,7 @@ export default function AirportBase(props) {
         castShadow
         receiveShadow
         geometry={nodes.AirportBase.geometry}
-        
+        position={[0,0.05,0]}
         scale={0.25}
       ><meshBasicMaterial color={"grey"} side={DoubleSide}/></mesh>
     </group>
