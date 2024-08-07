@@ -115,7 +115,7 @@ export default function AirportPlan(props) {
     });
 
     return (
-        <group {...props} dispose={null}>
+        <group {...props} dispose={null}       position={[0.0, 0.1, 0.0]}>
             <mesh
                 castShadow
                 receiveShadow
@@ -131,7 +131,7 @@ export default function AirportPlan(props) {
                 geometry={nodes['AirportPlan-Mat2'].geometry}
                 ref={mesh}
                 scale={0.25}
-                position={[0.0, 0.0001, 0.0]}
+                position={[0.0, 0.005, 0.0]}
 
             ><shaderMaterial fragmentShader={fragmentShader} vertexShader={vertexShader} uniforms={uniforms} transparent={true} emissiveIntensity={10.0}  /></mesh>
         </group>
