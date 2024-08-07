@@ -16,7 +16,7 @@ void main() {
   float sinWave =   sin(vUvs.x * 10.0 + (u_time * speed) );
   vec3 color = mix(colorA,colorB,sinWave);
   
-  gl_FragColor = vec4(color, 0.2);
+  gl_FragColor = vec4(color, 0.1);
 }
 
 `;
@@ -60,14 +60,14 @@ export default function Collaboration(props) {
         mesh.current.material.uniforms.u_time.value = clock.getElapsedTime();
     });
     return (
-        <group {...props} dispose={null} scale={0.008}>
+        <group {...props} dispose={null} scale={0.25}>
             <mesh
                 ref={mesh}
                 castShadow
                 receiveShadow
                 geometry={nodes.Collaboration.geometry}
                 material={nodes.Collaboration.material}
-            > <shaderMaterial vertexShader={vertexShader} fragmentShader={fragmentShader} uniforms={uniforms} transparent={true} opacity={0.4}/>
+            > <shaderMaterial vertexShader={vertexShader} fragmentShader={fragmentShader} uniforms={uniforms} transparent={true} opacity={0.2}/>
             </mesh>
         </group>
     )

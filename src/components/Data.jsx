@@ -102,12 +102,16 @@ const fragmentShader = `
         //  vec3 yellowColor =  vec3(0.541, 0.851, 0.094);
 
          
-         vec3 greenColor =  vec3(0.604, 0.722, 1);
-         vec3 yellowColor =  vec3(0.808, 0.867, 1);
+         vec3 greenColor =  vec3(0.8, 1.0, 1.0);
+         vec3 yellowColor =  vec3(0.0, 1.0, 1.0);
+
+         
+        //  vec3 greenColor =  vec3(0.604, 0.722, 1);
+        //  vec3 yellowColor =  vec3(0.808, 0.867, 1);
 
          vec3 mixColor = mix(yellowColor,greenColor,noiseSample);
         vec3 finalColor = vec3(color) * mixColor * 1.2;
-        gl_FragColor = vec4(finalColor, color* (noiseSample +0.1));
+        gl_FragColor = vec4(finalColor, color* (noiseSample +0.1) * 0.9);
     }
   `
 export default function Data(props) {
@@ -126,14 +130,15 @@ export default function Data(props) {
       mesh.current.material.uniforms.u_time.value = clock.getElapsedTime();
   });
   return (
-    <group {...props} dispose={null} scale={0.008}>
+    <group {...props} dispose={null}>
       <mesh
         castShadow
         receiveShadow
         geometry={nodes.Data.geometry}
         ref={mesh}
-        position={[0, 5.726, 0]}
-      ><shaderMaterial fragmentShader={fragmentShader} vertexShader={vertexShader} uniforms={uniforms} transparent={true} emissiveIntensity={10.0}  /></mesh>
+        scale={0.25}
+        position={[0,0.01, 0]}
+      ><shaderMaterial fragmentShader={fragmentShader} vertexShader={vertexShader} uniforms={uniforms} transparent={true} emissiveIntensity={10.0}     depthWrite={true}/></mesh>
     </group>
   )
 }

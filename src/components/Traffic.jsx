@@ -8,7 +8,7 @@ const fragmentShader = `
 // uniform int numRows;
 float speed=3.0;
 uniform float u_time;
-int numRows = 350; 
+int numRows = 900; 
 varying vec2 vUvs;
 
 // Function to generate a hash value based on a float input
@@ -18,7 +18,7 @@ float random(float x) {
 
 // Function to generate a random color based on an integer seed
 vec3 randomColor(int seed) {
-    float sinWave = abs(sin(vUvs.x * 10.0 + ((u_time * 0.4)  *   (float(seed)*0.01 * random(float(seed) )) )) - 1.) ;
+    float sinWave = abs(sin(vUvs.x * 10.0 + ((u_time * 0.1)  *   (float(seed)*0.01 * random(float(seed) )) )) - 1.) ;
     float r = random(float(seed) * 12.9898);
     float g = random(float(seed) * 78.233);
     float b = random(float(seed) * 45.164);
@@ -60,10 +60,10 @@ void main() {
     vec4 localPosition = vec4(position, 1.0);
     gl_Position = projectionMatrix * modelViewMatrix * localPosition;
     vUvs = uv;
-}
-`
-export default function Circulation(props) {
-  const { nodes, materials } = useGLTF('/models/Circulation.gltf')
+}`
+
+export default function Traffic(props) {
+  const { nodes, materials } = useGLTF('/models/Traffic.gltf')
   const mesh = useRef();
   const uniforms = useMemo(
     () => ({
@@ -80,20 +80,17 @@ export default function Circulation(props) {
   return (
     <group {...props} dispose={null}>
       <mesh
-        ref={mesh}
-        scale={0.2}
+      ref={mesh}
         castShadow
         receiveShadow
-        geometry={nodes.Circulation.geometry}
-        material={nodes.Circulation.material}
+        geometry={nodes.Traffic.geometry}
+        material={nodes.Traffic.material}
+        scale={0.25}
+        position={[0,0.01,0]}
+        
       ><shaderMaterial side={DoubleSide} fragmentShader={fragmentShader} vertexShader={vertexShader} uniforms={uniforms} transparent={true} /></mesh>
-      {/* <mesh position={[0.0,2.0,0.0]}>
-        <planeGeometry/>
-        <shaderMaterial side={DoubleSide} fragmentShader={fragmentShader} vertexShader={vertexShader} uniforms={uniforms} transparent={true}/>
-      </mesh> */}
     </group>
-
   )
 }
 
-useGLTF.preload('/models/Circulation.gltf')
+useGLTF.preload('/models/Traffic.gltf')

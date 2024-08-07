@@ -52,7 +52,7 @@ export default function Home() {
     {
       id: "item3",
       name: "Item 3",
-      title: "The future of cities is spatial-driven.",
+      title: "The future of cities is spatial-driven",
       sub: "Cities are becoming driven by smart, interconnected, spatial layers",
     },
   ];
@@ -87,6 +87,8 @@ export default function Home() {
       </>
     );
   };
+
+ 
 
   return (
     <main className="h-screen w-screen relative overflow-x-hidden">
@@ -123,7 +125,7 @@ export default function Home() {
       </div>
 
       <div className="h-full w-full">
-        <Canvas gl={{ antialias: true, toneMapping: THREE.NoToneMapping }}>
+        <Canvas gl={{ antialias: true, toneMapping: THREE.NoToneMapping }} >
           {/* Your regular scene contents go here, like always ... */}
        
           <ambientLight intensity={2.2} />
@@ -135,7 +137,7 @@ export default function Home() {
             rotation={[-Math.PI / 2, 0, 0]}
             position={[0.0, -0.1, 0.0]}
           >
-            <meshStandardMaterial color={"#F5F5F4"} />
+            <meshStandardMaterial color={"#e0e0e0"} />
             <planeGeometry></planeGeometry>
           </mesh>
           {/* <gridHelper args={[100, 100, `white`, `gray`]} /> */}

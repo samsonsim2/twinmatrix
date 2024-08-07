@@ -8,9 +8,19 @@ import Circulation from "@/components/Circulation";
 import Grass from "@/components/Grass";
 import Roads from "@/components/Roads";
 import Test2 from "@/components/Test2";
+import Map from "@/components/Map";
 import Collaboration from "@/components/Collaboration";
 import Heatmap2 from "@/components/Heatmap2";
 import Data from "@/components/Data";
+import Base from "@/components/Base";
+import Traffic from "@/components/Traffic";
+import AirportPlan from "@/components/AirportPlan";
+import Airport from "@/components/Airport";
+import Planes from "@/components/Planes";
+import AnimatedPlane from "@/components/AnimatedPlane";
+import AirportBase from "@/components/AirportBase";
+import Tower from "@/components/Tower";
+import Furniture from "@/components/Furniture"
 import React, { useEffect, useMemo, useRef } from 'react'
 
 import { useFrame } from "@react-three/fiber";
@@ -25,9 +35,12 @@ import { useGSAP } from '@gsap/react';
 import gsap from "gsap";
 export default function Set({ cameraState }) {
     const cameraRef = useRef(null);
-    const mesh = useRef(); const navigateAirport = () => {
+    const mesh = useRef();
+
+    const navigateAirport = () => {
         gsap.to(mesh.current.position, {
-            z: 10, // 45 degrees in radians
+            x: 5,
+            z: 18, // 45 degrees in radians
             duration: 2,
             ease: "power1.inOut",
         });
@@ -106,7 +119,7 @@ export default function Set({ cameraState }) {
     }, { scope: mesh });
 
     return <>
-        <OrbitControls enableZoom={false} enablePan={false} enableOrbit={false} />
+        <OrbitControls enableZoom={false} enablePan={false} enableOrbit={false}  enableRotate={false} maxPolarAngle={0} minPolarAngle={Math.PI / 3} />
 
         <OrthographicCamera
             ref={cameraRef}
@@ -123,47 +136,38 @@ export default function Set({ cameraState }) {
         />
 
         <mesh ref={mesh} position={[0, 0, 0]}>
-            {/* <Roads/> */}
-            <Platforms />
+
+            {/* <Platforms />
             <Buildings />
-            {/* <Icons /> */}
-            {/* <Heatmap /> */}
             <Heatmap2/>
             <Data/>
             <Test2 />
-            {/* <Lines /> */}
             <Circulation />
             <Grass />
             <Collaboration />
-            {/* <Test /> */}
+            */}
+            {/* <Data/> */}
+            {/*
+           
+            */}
+            <Tower />
+            <Planes />
+            <Grass />
+            <Traffic />
+            <Data />
+            <AirportPlan />
+            <AnimatedPlane />
+            <Lines cameraState={cameraState} />
+            <Buildings />
+            <Base />
+            <Airport cameraState={cameraState} />
+            <Heatmap2 />
+            <Collaboration/>
+            <AirportBase />
+            <Furniture/>
             <SpriteAnimator
+
                 position={[0.0, 2.4, 0.0]}
-                scale={0.5}
-
-                startFrame={0}
-                scaleFactor={0.01}
-                autoPlay={true}
-                loop={true}
-                numberOfFrames={1}
-                textureImageURL={'/textures/Location.png'}
-
-            />
-{/* 
-            <SpriteAnimator
-                position={[0.0, 2.4, 4.0]}
-                scale={0.7}
-
-                startFrame={0}
-                scaleFactor={0.01}
-                autoPlay={true}
-                loop={true}
-                numberOfFrames={1}
-                textureImageURL={'/textures/graph1.png'}
-
-            />
-
-            <SpriteAnimator
-                position={[5.0, 2.4, 4.0]}
                 scale={0.3}
 
                 startFrame={0}
@@ -171,22 +175,101 @@ export default function Set({ cameraState }) {
                 autoPlay={true}
                 loop={true}
                 numberOfFrames={1}
-                textureImageURL={'/textures/graph2.png'}
+                textureImageURL={'/textures/Icons-01.png'}
+
+
+
+
 
             />
 
-<SpriteAnimator
-                position={[-8.0, 2.0, 0.5]}
-                scale={0.5}
+            <SpriteAnimator
+
+                position={[5.0, 2.4, -10]}
+                scale={0.3}
 
                 startFrame={0}
                 scaleFactor={0.01}
                 autoPlay={true}
                 loop={true}
                 numberOfFrames={1}
-                textureImageURL={'/textures/graph3.png'}
+                textureImageURL={'/textures/Icons-01.png'}
 
-            /> */}
+
+
+
+
+            />
+
+
+            <SpriteAnimator
+
+                position={[0.0, 2.4, 8.0]}
+                scale={0.3}
+
+                startFrame={0}
+                scaleFactor={0.01}
+                autoPlay={true}
+                loop={true}
+                numberOfFrames={1}
+                textureImageURL={'/textures/Icons-01.png'}
+
+
+
+            />
+
+            <SpriteAnimator
+                position={[-2.0, 2.4, 4.0]}
+                scale={0.3}
+
+                startFrame={0}
+                scaleFactor={0.01}
+                autoPlay={true}
+                loop={true}
+                numberOfFrames={1}
+                textureImageURL={'/textures/Icons-02.png'}
+
+            />
+
+            <SpriteAnimator
+                position={[7.0, 2.4, 4.0]}
+                scale={0.3}
+
+                startFrame={0}
+                scaleFactor={0.01}
+                autoPlay={true}
+                loop={true}
+                numberOfFrames={1}
+                textureImageURL={'/textures/Icons-03.png'}
+
+            />
+
+            <SpriteAnimator
+                position={[-6.5, 2.0, -3]}
+                scale={0.3}
+
+                startFrame={0}
+                scaleFactor={0.01}
+                autoPlay={true}
+                loop={true}
+                numberOfFrames={1}
+                textureImageURL={'/textures/Icons-04.png'}
+
+            />
+
+
+            <SpriteAnimator
+                position={[-8.5, 2.0, 7]}
+                scale={0.3}
+
+                startFrame={0}
+                scaleFactor={0.01}
+                autoPlay={true}
+                loop={true}
+                numberOfFrames={1}
+                textureImageURL={'/textures/Icons-04.png'}
+
+            />
         </mesh>
 
     </>
