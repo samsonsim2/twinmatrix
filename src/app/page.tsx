@@ -241,7 +241,7 @@ export default function Home() {
         <SectionList />
         <ContactForm />
 
-        <footer className="bg-black text-white py-6 h-9 z-30 w-screen">
+        <footer className="bg-black text-white py-6 h-fit z-30 w-screen">
           <div className="container mx-auto px-8">
             <div className="flex justify-between items-center">
               <div className="text-sm">

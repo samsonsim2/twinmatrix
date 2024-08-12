@@ -40,14 +40,14 @@ export default function Set({ cameraState }) {
     const navigateAirport = () => {
         gsap.to(mesh.current.position, {
             x: 5,
-            z: 26, // 45 degrees in radians
+            z: 20, // 45 degrees in radians
             duration: 2,
             ease: "power1.inOut",
         });
         gsap.to(mesh.current.scale, {
-            x: 2,
-            y: 2,
-            z: 2, // 45 degrees in radians
+            x: 1.5,
+            y: 1.5,
+            z: 1.5, // 45 degrees in radians
             duration: 2,
             ease: "power1.inOut",
         });
