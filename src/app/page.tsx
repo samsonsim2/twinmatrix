@@ -80,7 +80,7 @@ export default function Home() {
             ref={buttonRef}
             onClick={() => handleClick(item.id)}
             type="button"
-            className="text-gray-900 bg-white  w-5 h-5 md:w-10 md:h-10
+            className="text-gray-900 bg-white  w-8 h-8 md:w-10 md:h-10
   focus:outline-none hover:bg-gray-100 focus:ring-4
    focus:ring-gray-100 font-medium rounded-full text-sm  
   shadow-md shadow-black"
