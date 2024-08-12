@@ -98,17 +98,16 @@ const fragmentShader = `
         noiseSample = map(fbm(coords, 16, 0.5, 1.0),-1.0, 1.0, 0.0, 1.0 );    
         noiseSample = smoothstep(0.4,0.55,noiseSample);
 
-        //  vec3 greenColor =  vec3(0.773, 1, 0.498);
-        //  vec3 yellowColor =  vec3(0.541, 0.851, 0.094);
+        // //option 1 original
+        //  vec3 greenColor =  vec3(0.8, 1.0, 1.0);
+        //  vec3 yellowColor =  vec3(0.0, 1.0, 1.0);
+
+        //option 2 yellow
+         vec3 greenColor =  vec3(1, 0.976, 0.612);
+         vec3 yellowColor =  vec3(1, 0.976, 0.612);
 
          
-         vec3 greenColor =  vec3(0.8, 1.0, 1.0);
-         vec3 yellowColor =  vec3(0.0, 1.0, 1.0);
-
-         
-        //  vec3 greenColor =  vec3(0.604, 0.722, 1);
-        //  vec3 yellowColor =  vec3(0.808, 0.867, 1);
-
+       
          vec3 mixColor = mix(yellowColor,greenColor,noiseSample);
         vec3 finalColor = vec3(color) * mixColor * 1.2;
         gl_FragColor = vec4(finalColor, color* (noiseSample +0.1) * 0.9);

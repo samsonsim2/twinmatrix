@@ -40,7 +40,7 @@ export default function Set({ cameraState }) {
     const navigateAirport = () => {
         gsap.to(mesh.current.position, {
             x: 5,
-            z: 18, // 45 degrees in radians
+            z: 26, // 45 degrees in radians
             duration: 2,
             ease: "power1.inOut",
         });
@@ -106,20 +106,20 @@ export default function Set({ cameraState }) {
         { id: "item3", name: "Item 3" },
     ];
 
-    useGSAP(() => {
-        gsap.to(mesh.current.rotation, {
+    // useGSAP(() => {
+    //     gsap.to(mesh.current.rotation, {
 
-            y: Math.PI / 18, // 45 degrees in radians
-            duration: 10,
-            repeat: -1, // Infinite repeat
-            yoyo: true, // Reverse the animation
-            ease: "power1.inOut",
-        });
+    //         y: Math.PI / 18, // 45 degrees in radians
+    //         duration: 10,
+    //         repeat: -1, // Infinite repeat
+    //         yoyo: true, // Reverse the animation
+    //         ease: "power1.inOut",
+    //     });
 
-    }, { scope: mesh });
+    // }, { scope: mesh });
 
     return <>
-        <OrbitControls enableZoom={false} enablePan={false} enableOrbit={false}  enableRotate={false} maxPolarAngle={0} minPolarAngle={Math.PI / 3} />
+        <OrbitControls enableZoom={false} enablePan={false} enableOrbit={false} enableRotate={false} maxPolarAngle={0} minPolarAngle={Math.PI / 3} />
 
         <OrthographicCamera
             ref={cameraRef}
@@ -137,38 +137,29 @@ export default function Set({ cameraState }) {
 
         <mesh ref={mesh} position={[0, 0, 0]}>
 
-            {/* <Platforms />
-            <Buildings />
-            <Heatmap2/>
-            <Data/>
-            <Test2 />
-            <Circulation />
+            <group scale={1.4}>
+
             <Grass />
-            <Collaboration />
-            */}
-            {/* <Data/> */}
-            {/*
-           
-            */}
-            <Tower />
-            <Planes />
-            <Grass />
-            <Traffic />
+            <Traffic />  
             <Data />
             <AirportPlan />
+            <Tower />
+            <Planes />
             <AnimatedPlane />
             <Lines cameraState={cameraState} />
-            <Buildings />
+           
             <Base />
             <Airport cameraState={cameraState} />
-            <Heatmap2 />
+             <Buildings />
+            <Heatmap2 />  
             <Collaboration/>
-            <AirportBase />
-            <Furniture/>
+             <AirportBase />
+            <Furniture />
+            </group>
             <SpriteAnimator
 
                 position={[0.0, 2.4, 0.0]}
-                scale={0.3}
+                scale={0.4}
 
                 startFrame={0}
                 scaleFactor={0.01}
@@ -176,17 +167,10 @@ export default function Set({ cameraState }) {
                 loop={true}
                 numberOfFrames={1}
                 textureImageURL={'/textures/Icons-01.png'}
-
-
-
-
-
             />
-
             <SpriteAnimator
-
                 position={[5.0, 2.4, -10]}
-                scale={0.3}
+                scale={0.5}
 
                 startFrame={0}
                 scaleFactor={0.01}
@@ -194,73 +178,50 @@ export default function Set({ cameraState }) {
                 loop={true}
                 numberOfFrames={1}
                 textureImageURL={'/textures/Icons-01.png'}
-
-
-
-
-
             />
-
-
             <SpriteAnimator
-
                 position={[0.0, 2.4, 8.0]}
-                scale={0.3}
-
+                scale={0.5}
                 startFrame={0}
                 scaleFactor={0.01}
                 autoPlay={true}
                 loop={true}
                 numberOfFrames={1}
                 textureImageURL={'/textures/Icons-01.png'}
-
-
-
             />
-
             <SpriteAnimator
                 position={[-2.0, 2.4, 4.0]}
-                scale={0.3}
-
+                scale={0.5}
                 startFrame={0}
                 scaleFactor={0.01}
                 autoPlay={true}
                 loop={true}
                 numberOfFrames={1}
                 textureImageURL={'/textures/Icons-02.png'}
-
             />
-
             <SpriteAnimator
                 position={[7.0, 2.4, 4.0]}
-                scale={0.3}
-
+                scale={0.5}
                 startFrame={0}
                 scaleFactor={0.01}
                 autoPlay={true}
                 loop={true}
                 numberOfFrames={1}
                 textureImageURL={'/textures/Icons-03.png'}
-
             />
-
             <SpriteAnimator
                 position={[-6.5, 2.0, -3]}
-                scale={0.3}
-
+                scale={0.5}
                 startFrame={0}
                 scaleFactor={0.01}
                 autoPlay={true}
                 loop={true}
                 numberOfFrames={1}
                 textureImageURL={'/textures/Icons-04.png'}
-
             />
-
-
             <SpriteAnimator
                 position={[-8.5, 2.0, 7]}
-                scale={0.3}
+                scale={0.5}
 
                 startFrame={0}
                 scaleFactor={0.01}
@@ -268,7 +229,6 @@ export default function Set({ cameraState }) {
                 loop={true}
                 numberOfFrames={1}
                 textureImageURL={'/textures/Icons-04.png'}
-
             />
         </mesh>
 

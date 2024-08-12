@@ -10,7 +10,15 @@ uniform float u_time;
  
 void main() {
   vec3 colorB =  vec3(1.0,1.0,1.0);
-  vec3 colorA = vec3(0,0,1);
+  //option 1 original
+//   vec3 colorA = vec3(0,0,1);
+
+
+  //option 2 yellow
+  vec3 colorA = vec3(1,0.5,0);
+
+
+
   vec3 blue = vec3(0.784, 0.314, 1);   
   float speed = 4.0;
   float sinWave =   sin(vUvs.x * 10.0 + (u_time * speed) );

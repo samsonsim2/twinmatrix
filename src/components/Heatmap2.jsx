@@ -62,8 +62,25 @@ float map(float value, float min1, float max1, float min2, float max2) {
 }
 void main(void) {
     
-    vec3 colorB =  vec3(1, 0.655, 0);
+    //Option1 Original
+    // vec3 colorB =  vec3(1, 0.655, 0);
+    // vec3 colorA = vec3(1,1,0);
+
+
+        
+    //Option2 Purple
+    // vec3 colorB =  vec3(0.933, 0.396, 0.945);
+    // vec3 colorA = vec3(0.635, 0.282, 0.831);
+
+         
+    // //Option2 yellow
+    vec3 colorB =  vec3(0.592, 0.769, 0.075);
     vec3 colorA = vec3(1,1,0);
+
+        // Option2 orange
+//      vec3 colorB =  vec3(1, 0.553, 0.231);
+//    vec3 colorA = vec3(1, 0.761, 0.231);
+
 
     vec3 coords = vec3(vUvs * 10.0, u_time * 0.4); 
     float noiseSample = 0.0;
@@ -92,38 +109,7 @@ void main() {
     vUvs = uv;
 }
 `
-// const fragmentShader = `
-    
-//     varying vec2    vUvs;
-//     uniform float u_time;
-    
-//     float rand(vec2 co) {
-//         return fract(sin(dot(co.xy, vec2(12.9898,78.233))) * 43758.5453);
-//     }
-
-//     void main() {
-//         vec2 st = vUvs;
-//         st.x += u_time * 0.1; // Shift in x direction over time
-//         st *= 40.0; // Number of squares along each axis, reduce to space out squares
-//         vec2 ipos = floor(st); // integer position
-//         vec2 fpos = fract(st); // fractional position
-        
-//         // Random size for each square
-//         float randSize = rand(ipos) * 0.5 + 0.75; // Sizes between 0.75 and 1.25
-        
-//         // Centering the squares and spacing them out
-//         vec2 center = vec2(0.5);
-//         vec2 dist = (abs(fpos - center) / randSize) * vec2(1.2); // Scale distances by random size
-        
-//         float color = step(0.5, dist.x) + step(0.5, dist.y);
-//         color = 1.0 - color; // Inverting the color to make squares white
-
-//          vec3 greenColor =  vec3(0.773, 1, 0.498);
-//         vec3 finalColor = vec3(color) * greenColor;
-//         gl_FragColor = vec4(finalColor, color * 0.7);
-//     }
-//   `
-
+ 
 export default function Heatmap2(props) {
     const { nodes, materials } = useGLTF('/models/Heatmap2.gltf')
     const mesh = useRef();

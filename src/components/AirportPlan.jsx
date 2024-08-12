@@ -3,7 +3,7 @@ import React, { useMemo, useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 import { useFrame, useLoader } from '@react-three/fiber'
 import { TextureLoader } from 'three'
-
+ 
 
 const fragmentShader = `
 
@@ -38,7 +38,7 @@ float noise( in vec3 p )
  
 
 varying vec2    vUvs;
-uniform float u_time;
+uniform float time;
  
 float fbm(vec3 p, int octaves, float persistence, float lacunarity){
     float amplitude = 0.01;
@@ -68,7 +68,7 @@ void main(void) {
     vec3 colorB =  vec3(1, 0, 0);
     vec3 colorA = vec3(1,0,0);
 
-    vec3 coords = vec3(vUvs * 10.0, u_time * 0.4); 
+    vec3 coords = vec3(vUvs * 10.0, time * 0.4); 
     float noiseSample = 0.0;
     noiseSample = map(fbm(coords, 16, 0.5, 1.0),-1.0, 1.0, 0.0, 1.0 );    
     noiseSample = smoothstep(0.4,0.55,noiseSample);
@@ -112,6 +112,8 @@ export default function AirportPlan(props) {
     useFrame((state) => {
         const { clock } = state;
         mesh.current.material.uniforms.u_time.value = clock.getElapsedTime();
+        
+ 
     });
 
     return (
