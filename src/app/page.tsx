@@ -80,7 +80,7 @@ export default function Home() {
             ref={buttonRef}
             onClick={() => handleClick(item.id)}
             type="button"
-            className="text-gray-900 bg-white   w-10 h-10
+            className="text-gray-900 bg-white  w-5 h-5 md:w-10 md:h-10
   focus:outline-none hover:bg-gray-100 focus:ring-4
    focus:ring-gray-100 font-medium rounded-full text-sm  
   shadow-md shadow-black"
@@ -212,10 +212,10 @@ export default function Home() {
           <ButtonList />
         </div>
         <div className="pb-12 px-8 mt-3 flex-basis-0.25 bg-gradient-to-t from-white to-transparent ">
-          <h1 className=" text-4xl text-slate-800 font-bold ">
+          <h1 className=" text-xl md:text-4xl text-slate-800 font-bold ">
             {items[cameraState - 1].title}
           </h1>
-          <h3 className="  text-2xl text-slate-800">
+          <h3 className=" text-sm  md:text-2xl text-slate-800">
             {items[cameraState - 1].sub}
           </h3>
         </div>
