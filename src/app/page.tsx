@@ -45,7 +45,7 @@ export default function Home() {
   useEffect(()=>{ 
     console.log("change size")
 
-    if(size.width> 600){
+    if(size.width!> 600){
       setIsMobile(false)
     }else{
       setIsMobile(true)
