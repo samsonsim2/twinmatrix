@@ -122,17 +122,17 @@ export default function Set({ cameraState, isMobile }) {
     }, [isMobile])
 
 
-    // useGSAP(() => {
-    //     gsap.to(mesh.current.rotation, {
+    useGSAP(() => {
+        gsap.to(mesh.current.rotation, {
 
-    //         y: Math.PI / 18, // 45 degrees in radians
-    //         duration: 10,
-    //         repeat: -1, // Infinite repeat
-    //         yoyo: true, // Reverse the animation
-    //         ease: "power1.inOut",
-    //     });
+            y: Math.PI / 18, // 45 degrees in radians
+            duration: 10,
+            repeat: -1, // Infinite repeat
+            yoyo: true, // Reverse the animation
+            ease: "power1.inOut",
+        });
 
-    // }, { scope: mesh });
+    }, { scope: mesh });
 
     const spriteSize = 0.6
     return <>
