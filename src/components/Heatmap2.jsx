@@ -63,8 +63,8 @@ float map(float value, float min1, float max1, float min2, float max2) {
 void main(void) {
     
     //Option1 Original
-    // vec3 colorB =  vec3(1, 0.655, 0);
-    // vec3 colorA = vec3(1,1,0);
+    vec3 colorB =  vec3(1, 0.655, 0);
+    vec3 colorA = vec3(1,1,0);
 
 
         
@@ -74,8 +74,8 @@ void main(void) {
 
          
     // //Option2 yellow
-    vec3 colorB =  vec3(0.592, 0.769, 0.075);
-    vec3 colorA = vec3(1,1,0);
+    // vec3 colorB =  vec3(0.592, 0.769, 0.075);
+    // vec3 colorA = vec3(1,1,0);
 
         // Option2 orange
 //      vec3 colorB =  vec3(1, 0.553, 0.231);

@@ -33,6 +33,11 @@ void main() {
   // // option2- purple
   // vec3 colorB =  vec3(1.0,1.0,1.0);
   // vec3 colorA = vec3(0.514, 0.22, 1);
+
+
+    // // option2-light purple
+  vec3 colorB =  vec3(1.0,1.0,1.0);
+  vec3 colorA = vec3(0.875, 0.635, 1);
   
   // vec3 colorA = vec3(0.867, 0.639, 1);
 
@@ -43,8 +48,8 @@ void main() {
 
 
   // option2- greeny yellow
-  vec3 colorB =  vec3(1.0,1.0,1.0);
- vec3 colorA = vec3(1,1,0);
+//   vec3 colorB =  vec3(1.0,1.0,1.0);
+//  vec3 colorA = vec3(1,1,0);
 
 
    // option2- orange

@@ -11,7 +11,7 @@ export default function Airport({props,cameraState}) {
     
   const revealAirport = () => {
       gsap.to(mesh.current.position, {
-          y:7,        
+          y:9,        
           duration: 2,
           ease: "power1.inOut",
       });
@@ -37,28 +37,35 @@ export default function Airport({props,cameraState}) {
 
 }, [cameraState])
   return (
+
     <group {...props} dispose={null} scale={0.25} position={[0,0.1,0]}>
       <mesh
-       ref={mesh}
         castShadow
         receiveShadow
-        geometry={nodes.Airport_1.geometry}
-        material={nodes.Airport_1.material}
-        
-      > <meshStandardMaterial color={"white"} transparent={true} opacity={0.9} /></mesh>
+        geometry={nodes['Airport-Mat7'].geometry}
+        material={materials['Mat.7']}
+      />
       <mesh
+   
+        castShadow
+        receiveShadow
+        geometry={nodes['Airport-Mat6'].geometry}
+        material={materials['Mat.6']}
+      />
+      <mesh
+      
         castShadow
         receiveShadow
         geometry={nodes['Airport-Mat'].geometry}
         material={materials.Mat}
       />
       <mesh
+         ref={mesh}
         castShadow
         receiveShadow
-        geometry={nodes['Airport-Mat_1'].geometry}
-        material={materials.Mat}
-        
-      ><meshBasicMaterial color={"#BABABA"} side={DoubleSide}/></mesh>
+        geometry={nodes['Airport-Mat3'].geometry}
+        material={materials['Mat.3']}
+      />
     </group>
   )
 }

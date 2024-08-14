@@ -21,7 +21,7 @@ import AnimatedPlane from "@/components/AnimatedPlane";
 import AirportBase from "@/components/AirportBase";
 import Tower from "@/components/Tower";
 import Furniture from "@/components/Furniture"
-import React, { useEffect, useMemo, useRef } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 
 import { useFrame } from "@react-three/fiber";
 import {
@@ -33,21 +33,24 @@ import {
 } from "@react-three/drei";
 import { useGSAP } from '@gsap/react';
 import gsap from "gsap";
-export default function Set({ cameraState }) {
+import useWindowSize from "@/hooks/useWindowSize";
+export default function Set({ cameraState, isMobile }) {
+    const size = useWindowSize();
     const cameraRef = useRef(null);
     const mesh = useRef();
 
     const navigateAirport = () => {
+        console.log(size.width)
         gsap.to(mesh.current.position, {
-            x: 5,
-            z: 20, // 45 degrees in radians
+            x: isMobile ? 2 : 5,
+            z: isMobile ? 10.5: 20, // 45 degrees in radians
             duration: 2,
             ease: "power1.inOut",
         });
         gsap.to(mesh.current.scale, {
-            x: 1.5,
-            y: 1.5,
-            z: 1.5, // 45 degrees in radians
+            x: isMobile ? 1.2 : 1.5,
+            y: isMobile ? 1.2 : 1.5,
+            z: isMobile ? 1.2 : 1.55, // 45 degrees in radians
             duration: 2,
             ease: "power1.inOut",
         });
@@ -89,10 +92,9 @@ export default function Set({ cameraState }) {
     useEffect(() => {
         if (cameraState === 1) {
             navigateAirport()
-        } else if (cameraState === 2) {
-            navigateRetail()
         } else {
             navigateHome()
+
         }
 
     }, [cameraState])
@@ -106,6 +108,20 @@ export default function Set({ cameraState }) {
         { id: "item3", name: "Item 3" },
     ];
 
+    const [globalScale, setGlobalScale] = useState(1.4)
+
+    useEffect(() => {
+
+        if (!isMobile) {
+            setGlobalScale(0.1)
+
+        } else {
+            setGlobalScale(1.4)
+        }
+
+    }, [isMobile])
+
+
     // useGSAP(() => {
     //     gsap.to(mesh.current.rotation, {
 
@@ -118,7 +134,9 @@ export default function Set({ cameraState }) {
 
     // }, { scope: mesh });
 
+    const spriteSize = 0.6
     return <>
+
         <OrbitControls enableZoom={false} enablePan={false} enableOrbit={false} enableRotate={false} maxPolarAngle={0} minPolarAngle={Math.PI / 3} />
 
         <OrthographicCamera
@@ -137,29 +155,30 @@ export default function Set({ cameraState }) {
 
         <mesh ref={mesh} position={[0, 0, 0]}>
 
-            <group scale={1.4}>
+            <group scale={isMobile ? 1 : 1.4}>
 
-            <Grass />
-            <Traffic />  
-            <Data />
-            <AirportPlan />
-            <Tower />
-            <Planes />
-            <AnimatedPlane />
-            <Lines cameraState={cameraState} />
-           
-            <Base />
-            <Airport cameraState={cameraState} />
-             <Buildings />
-            <Heatmap2 />  
-            <Collaboration/>
-             <AirportBase />
-            <Furniture />
+                <Grass />
+                <Traffic />
+                <Data />
+                <AirportPlan />
+                <Tower />
+                <Planes />
+                <AnimatedPlane />
+                <Lines cameraState={cameraState} />
+
+                <Base />
+                <Airport cameraState={cameraState} />
+                <Buildings />
+                <Heatmap2 />
+                <Collaboration />
+                <AirportBase />
+                <Furniture />
             </group>
+
             <SpriteAnimator
 
                 position={[0.0, 2.4, 0.0]}
-                scale={0.4}
+                scale={spriteSize}
 
                 startFrame={0}
                 scaleFactor={0.01}
@@ -170,7 +189,7 @@ export default function Set({ cameraState }) {
             />
             <SpriteAnimator
                 position={[5.0, 2.4, -10]}
-                scale={0.5}
+                scale={spriteSize}
 
                 startFrame={0}
                 scaleFactor={0.01}
@@ -181,7 +200,7 @@ export default function Set({ cameraState }) {
             />
             <SpriteAnimator
                 position={[0.0, 2.4, 8.0]}
-                scale={0.5}
+                scale={spriteSize}
                 startFrame={0}
                 scaleFactor={0.01}
                 autoPlay={true}
@@ -191,7 +210,7 @@ export default function Set({ cameraState }) {
             />
             <SpriteAnimator
                 position={[-2.0, 2.4, 4.0]}
-                scale={0.5}
+                scale={spriteSize}
                 startFrame={0}
                 scaleFactor={0.01}
                 autoPlay={true}
@@ -201,7 +220,7 @@ export default function Set({ cameraState }) {
             />
             <SpriteAnimator
                 position={[7.0, 2.4, 4.0]}
-                scale={0.5}
+                scale={spriteSize}
                 startFrame={0}
                 scaleFactor={0.01}
                 autoPlay={true}
@@ -211,7 +230,7 @@ export default function Set({ cameraState }) {
             />
             <SpriteAnimator
                 position={[-6.5, 2.0, -3]}
-                scale={0.5}
+                scale={spriteSize}
                 startFrame={0}
                 scaleFactor={0.01}
                 autoPlay={true}
@@ -221,7 +240,7 @@ export default function Set({ cameraState }) {
             />
             <SpriteAnimator
                 position={[-8.5, 2.0, 7]}
-                scale={0.5}
+                scale={spriteSize}
 
                 startFrame={0}
                 scaleFactor={0.01}

@@ -23,7 +23,9 @@ import Set from "@/components/Set";
 import { BlendFunction } from "postprocessing";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
-
+import LocalAirportIcon from "@mui/icons-material/LocalAirport";
+import LocationCityIcon from "@mui/icons-material/LocationCity";
+import useWindowSize from "@/hooks/useWindowSize";
 import {
   Bloom,
   DepthOfField,
@@ -36,7 +38,20 @@ export default function Home() {
   const buttonRef = useRef(null);
   const cameraRef = useRef(null);
   const mesh = useRef(null);
-  const [cameraState, setCameraState] = useState(3);
+  const [isMobile,setIsMobile] = useState(false);
+  const [cameraState, setCameraState] = useState(2);
+  const size = useWindowSize();
+
+  useEffect(()=>{ 
+    console.log("change size")
+
+    if(size.width> 600){
+      setIsMobile(false)
+    }else{
+      setIsMobile(true)
+    }
+  
+  },[size])
 
   const items = [
     {
@@ -44,26 +59,26 @@ export default function Home() {
       name: "Item 1",
       title: "Smart airports enable seamless journeys",
       sub: "Enhance airport planning and real-time operations through spatial AI",
+      icon: <LocalAirportIcon sx={{ color: "#334155" }} />,
+      display: true,
     },
+
     {
       id: "item2",
       name: "Item 2",
-      title: "Upgrade retail with spatial insights",
-      sub: "Extract shopper behaviour in physical space and amplify retail performance",
-    },
-    {
-      id: "item3",
-      name: "Item 3",
       title: "The future of cities is spatial-driven",
       sub: "Cities are becoming driven by smart, interconnected, spatial layers",
+      icon: <LocationCityIcon sx={{ color: "#334155" }} />,
     },
   ];
 
   const handleClick = (id: string) => {
     if (id === "item1") {
       setCameraState(1);
+      console.log(size.width);
     } else if (id === "item2") {
       setCameraState(2);
+      console.log(size.width);
     } else {
       setCameraState(3);
     }
@@ -84,7 +99,9 @@ export default function Home() {
   focus:outline-none hover:bg-gray-100 focus:ring-4
    focus:ring-gray-100 font-medium rounded-full text-sm  
   shadow-md shadow-black"
-          ></button>
+          >
+            {item.icon}
+          </button>
         ))}
       </>
     );
@@ -152,14 +169,17 @@ export default function Home() {
           </>
         ) : (
           <>
-            <div className="sm:basis-0 md:basis-1/2 bg-stone-200 flex justify-center ">  <Image
-              src={imageUrl}
-              alt="Description of image"
-              width={500} // Desired width in pixels
-              height={300} // Desired height in pixels
-              className="hidden md:block  rounded-lg my-auto"
-            /></div>
-          
+            <div className="sm:basis-0 md:basis-1/2 bg-stone-200 flex justify-center ">
+              {" "}
+              <Image
+                src={imageUrl}
+                alt="Description of image"
+                width={500} // Desired width in pixels
+                height={300} // Desired height in pixels
+                className="hidden md:block  rounded-lg my-auto"
+              />
+            </div>
+
             <div className="sm:basis-1 md:basis-1/2 p-20  flex flex-col  justify-center">
               <div>
                 <h1 className="font-extrabold pb-5 text-5xl">{title} </h1>
@@ -211,7 +231,7 @@ export default function Home() {
         <div className="flex flex-row px-8 gap-4">
           <ButtonList />
         </div>
-        <div className="pb-12 px-8 mt-3 flex-basis-0.25 bg-gradient-to-t from-white to-transparent ">
+        <div className="pb-24 md:pb-12 px-8 mt-3 flex-basis-0.25 bg-gradient-to-t from-white to-transparent ">
           <h1 className=" text-xl md:text-4xl text-slate-800 font-bold ">
             {items[cameraState - 1].title}
           </h1>
@@ -226,7 +246,7 @@ export default function Home() {
           <ambientLight intensity={2.2} />
           <directionalLight position={[1.0, 2.0, 0.0]} />
 
-          <Set cameraState={cameraState} />
+          <Set cameraState={cameraState}  isMobile={isMobile}/>
           <mesh
             scale={100}
             rotation={[-Math.PI / 2, 0, 0]}

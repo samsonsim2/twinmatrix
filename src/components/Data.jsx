@@ -103,8 +103,13 @@ const fragmentShader = `
         //  vec3 yellowColor =  vec3(0.0, 1.0, 1.0);
 
         //option 2 yellow
-         vec3 greenColor =  vec3(1, 0.976, 0.612);
+        //  vec3 greenColor =  vec3(1, 0.976, 0.612);
+        //  vec3 yellowColor =  vec3(1, 0.976, 0.612);
+
+           //option 3 orange
+         vec3 greenColor =  vec3(1, 0.702, 0.322);
          vec3 yellowColor =  vec3(1, 0.976, 0.612);
+
 
          
        

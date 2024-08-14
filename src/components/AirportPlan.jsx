@@ -66,12 +66,16 @@ float map(float value, float min1, float max1, float min2, float max2) {
 void main(void) {
     
     vec3 colorB =  vec3(1, 0, 0);
-    vec3 colorA = vec3(1,0,0);
+    vec3 colorA = vec3(1,1,0);
 
     vec3 coords = vec3(vUvs * 10.0, time * 0.4); 
     float noiseSample = 0.0;
     noiseSample = map(fbm(coords, 16, 0.5, 1.0),-1.0, 1.0, 0.0, 1.0 );    
-    noiseSample = smoothstep(0.4,0.55,noiseSample);
+    noiseSample = smoothstep(0.4,0.6,noiseSample);
+
+    
+
+    
      
 
     // float level = (noiseSample * 1.5) * 3.14159265 / 2.0;
@@ -103,7 +107,7 @@ export default function AirportPlan(props) {
     const mesh = useRef();
     const uniforms = useMemo(
         () => ({
-            u_time: {
+            time: {
                 value: 0.0,
             },
 
@@ -111,7 +115,7 @@ export default function AirportPlan(props) {
     );
     useFrame((state) => {
         const { clock } = state;
-        mesh.current.material.uniforms.u_time.value = clock.getElapsedTime();
+        mesh.current.material.uniforms.time.value = clock.getElapsedTime() * 0.3;
         
  
     });
