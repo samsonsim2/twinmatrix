@@ -21,6 +21,7 @@ import AnimatedPlane from "@/components/AnimatedPlane";
 import AirportBase from "@/components/AirportBase";
 import Tower from "@/components/Tower";
 import Furniture from "@/components/Furniture"
+import UpLines from "@/components/UpLines"
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 
 import { useFrame } from "@react-three/fiber";
@@ -136,8 +137,8 @@ export default function Set({ cameraState, isMobile }) {
 
     const spriteSize = 0.6
     return <>
-
-        <OrbitControls enableZoom={false} enablePan={false} enableOrbit={false} enableRotate={false} maxPolarAngle={0} minPolarAngle={Math.PI / 3} />
+    <OrbitControls enableZoom={false} enablePan={false} enableOrbit={true} enableRotate={false} maxPolarAngle={0} minPolarAngle={Math.PI / 3} />
+ 
 
         <OrthographicCamera
             ref={cameraRef}
@@ -173,11 +174,14 @@ export default function Set({ cameraState, isMobile }) {
                 <Collaboration />
                 <AirportBase />
                 <Furniture />
+                <UpLines/>
+                 
             </group>
 
-            <SpriteAnimator
 
-                position={[0.0, 2.4, 0.0]}
+            {/* <SpriteAnimator
+
+                position={[-3.0, 2.4,-1.5]}
                 scale={spriteSize}
 
                 startFrame={0}
@@ -248,7 +252,7 @@ export default function Set({ cameraState, isMobile }) {
                 loop={true}
                 numberOfFrames={1}
                 textureImageURL={'/textures/Icons-04.png'}
-            />
+            /> */}
         </mesh>
 
     </>
