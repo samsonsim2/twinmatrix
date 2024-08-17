@@ -54,7 +54,7 @@ export default function Home() {
       setIsMobile(true);
     }
 
-    if (size.width! >1800) {
+    if (size.width! >1400) {
       setIsWide(true);
     } else {
       setIsWide(false);
