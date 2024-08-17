@@ -137,7 +137,7 @@ export default function AirportPlan(props) {
                 geometry={nodes['AirportPlan-Mat2'].geometry}
                 ref={mesh}
                 scale={0.25}
-                position={[0.0, 0.005, 0.0]}
+                position={[0.0, 0.01, 0.0]}
 
             ><shaderMaterial fragmentShader={fragmentShader} vertexShader={vertexShader} uniforms={uniforms} transparent={true} emissiveIntensity={10.0}  /></mesh>
         </group>
