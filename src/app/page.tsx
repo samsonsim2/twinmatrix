@@ -71,10 +71,10 @@ export default function Home() {
   ];
 
   const handleClick = (id: string) => {
-    if (id === 1) {
+    if (id === "1") {
       setCameraState(1);
       console.log(size.width);
-    } else if (id === 2) {
+    } else if (id === "2") {
       setCameraState(2);
       console.log(size.width);
     } else {
@@ -88,10 +88,10 @@ export default function Home() {
         {items.map((item, index) => (
           <button
             key={index}
-            id={item.id}
+            id={item.id.toString()}
             name={item.name}
             ref={buttonRef}
-            onClick={() => handleClick(item.id)}
+            onClick={() => handleClick(item.id.toString())}
             type="button"
             className={`text-gray-900  bg-white w-8 h-8 md:w-10 md:h-10
             ${
