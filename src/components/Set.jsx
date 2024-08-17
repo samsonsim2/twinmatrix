@@ -35,7 +35,7 @@ import {
 import { useGSAP } from '@gsap/react';
 import gsap from "gsap";
 import useWindowSize from "@/hooks/useWindowSize";
-export default function Set({ cameraState, isMobile }) {
+export default function Set({ cameraState, isMobile, isWide }) {
     const size = useWindowSize();
     const cameraRef = useRef(null);
     const mesh = useRef();
@@ -44,7 +44,7 @@ export default function Set({ cameraState, isMobile }) {
         console.log(size.width)
         gsap.to(mesh.current.position, {
             x: isMobile ? 2 : 5,
-            z: isMobile ? 5 : 14, // 45 degrees in radians
+            z: isMobile ? 5 : isWide?40:18, // 45 degrees in radians
             duration: 2,
             ease: "power1.inOut",
         });
@@ -114,14 +114,18 @@ export default function Set({ cameraState, isMobile }) {
 
     useEffect(() => {
 
-        if (!isMobile) {
-            setGlobalScale(0.05)
-
-        } else {
+        if (!isMobile && !isWide) {
             setGlobalScale(1.4)
+
+        } else if(!isMobile && isWide) {
+
+
+            setGlobalScale(3)
+        }else{
+            setGlobalScale(1)
         }
 
-    }, [isMobile])
+    }, [isMobile,isWide])
 
 
     useGSAP(() => {
@@ -157,7 +161,7 @@ export default function Set({ cameraState, isMobile }) {
 
         <mesh ref={mesh}   >
 
-            <group scale={isMobile ? 0.8 : 1.4} position={isMobile?[0,0,3]:[0,0,0]}>
+            <group scale={globalScale} position={isMobile?[0,0,3]:[0,0,0]}>
 
                 <Grass />
                 <Traffic />

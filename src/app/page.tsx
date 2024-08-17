@@ -39,16 +39,25 @@ export default function Home() {
   const cameraRef = useRef(null);
   const mesh = useRef(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [isWide, setIsWide] = useState(false);
   const [cameraState, setCameraState] = useState(1);
   const size = useWindowSize();
+  
 
   useEffect(() => {
     console.log("change size");
+    console.log(size)
 
     if (size.width! > 600) {
       setIsMobile(false);
     } else {
       setIsMobile(true);
+    }
+
+    if (size.width! >1800) {
+      setIsWide(true);
+    } else {
+      setIsWide(false);
     }
   }, [size]);
 
@@ -289,7 +298,7 @@ export default function Home() {
           <ambientLight intensity={2.2} />
           <directionalLight position={[1.0, 2.0, 0.0]} />
 
-          <Set cameraState={cameraState} isMobile={isMobile} />
+          <Set cameraState={cameraState} isMobile={isMobile}  isWide={isWide}/>
           <mesh
             scale={100}
             rotation={[-Math.PI / 2, 0, 0]}
