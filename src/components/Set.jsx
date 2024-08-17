@@ -44,7 +44,7 @@ export default function Set({ cameraState, isMobile, isWide }) {
         console.log(size.width)
         gsap.to(mesh.current.position, {
             x: isMobile ? 2 : 5,
-            z: isMobile ? 5 : isWide?40:18, // 45 degrees in radians
+            z: isMobile ? 4 : isWide?40:18, // 45 degrees in radians
             duration: 2,
             ease: "power1.inOut",
         });
@@ -121,8 +121,8 @@ export default function Set({ cameraState, isMobile, isWide }) {
 
 
             setGlobalScale(3)
-        }else{
-            setGlobalScale(1)
+        }else {
+            setGlobalScale(0.8)
         }
 
     }, [isMobile,isWide])
