@@ -15,7 +15,7 @@ void main() {
 
 
   //option 2 yellow
-  vec3 colorA = vec3(1,0.5,0);
+  vec3 colorA = vec3(0.224, 0.376, 1);
 
 
 

@@ -38,45 +38,43 @@ export default function Home() {
   const buttonRef = useRef(null);
   const cameraRef = useRef(null);
   const mesh = useRef(null);
-  const [isMobile,setIsMobile] = useState(false);
-  const [cameraState, setCameraState] = useState(2);
+  const [isMobile, setIsMobile] = useState(false);
+  const [cameraState, setCameraState] = useState(1);
   const size = useWindowSize();
 
-  useEffect(()=>{ 
-    console.log("change size")
+  useEffect(() => {
+    console.log("change size");
 
-    if(size.width!> 600){
-      setIsMobile(false)
-    }else{
-      setIsMobile(true)
+    if (size.width! > 600) {
+      setIsMobile(false);
+    } else {
+      setIsMobile(true);
     }
-  
-  },[size])
+  }, [size]);
 
   const items = [
     {
-      id: "item1",
+      id: 1,
       name: "Item 1",
-      title: "Smart airports enable seamless journeys",
-      sub: "Enhance airport planning and real-time operations through spatial AI",
-      icon: <LocalAirportIcon sx={{ color: "#334155" }} />,
-      display: true,
-    },
-
-    {
-      id: "item2",
-      name: "Item 2",
       title: "The future of cities is spatial-driven",
       sub: "Cities are becoming driven by smart, interconnected, spatial layers",
       icon: <LocationCityIcon sx={{ color: "#334155" }} />,
     },
+
+    {
+      id: 2,
+      name: "Item 2",
+      title: "Smart airports enable seamless journeys",
+      sub: "Enhance airport planning and real-time operations through spatial AI",
+      icon: <LocalAirportIcon sx={{ color: "#334155" }} />,
+    },
   ];
 
   const handleClick = (id: string) => {
-    if (id === "item1") {
+    if (id === 1) {
       setCameraState(1);
       console.log(size.width);
-    } else if (id === "item2") {
+    } else if (id === 2) {
       setCameraState(2);
       console.log(size.width);
     } else {
@@ -87,18 +85,23 @@ export default function Home() {
   const ButtonList = () => {
     return (
       <>
-        {items.map((item) => (
+        {items.map((item, index) => (
           <button
-            key={item.id}
+            key={index}
             id={item.id}
             name={item.name}
             ref={buttonRef}
             onClick={() => handleClick(item.id)}
             type="button"
-            className="text-gray-900 bg-white  w-8 h-8 md:w-10 md:h-10
+            className={`text-gray-900  bg-white w-8 h-8 md:w-10 md:h-10
+            ${
+              cameraState == item.id
+                ? "border-gray-500 border-2"
+                : "border-white border-2"
+            }
   focus:outline-none hover:bg-gray-100 focus:ring-4
    focus:ring-gray-100 font-medium rounded-full text-sm  
-  shadow-md shadow-black"
+  shadow-md shadow-black`}
           >
             {item.icon}
           </button>
@@ -110,7 +113,7 @@ export default function Home() {
     title: string;
     sub: string;
     imageUrl: string;
-    isEven: boolean;
+    isEven?: boolean;
   }
 
   const sectionContent = [
@@ -143,16 +146,16 @@ export default function Home() {
     },
   ];
 
-  function Section({ title, sub, imageUrl, isEven }: SectionProp) {
+  function DesktopSection({ title, sub, imageUrl, isEven }: SectionProp) {
     return (
-      <section className="  h-screen  z-30 w-screen  flex justify-between  align-center  bg-stone-100 flex flex-row  ">
+      <section className="  h-200  z-30 w-screen  flex justify-between  align-center  bg-stone-100 flex flex-col sm:flex-row  ">
         {!isEven ? (
           <>
             <div className="sm:basis-1 md:basis-1/2 p-20  flex flex-col  justify-center">
               <div>
                 <h1 className="font-extrabold pb-5 text-5xl">{title} </h1>
                 <h3 className="  pb-8 sm:text-2xl md:text-lg">{sub}</h3>
-                <button className="bg-black p-5 rounded-md sm:text-lg md:text-2xl ">
+                <button className="bg-black p-5 rounded-md sm:text-lg md:text-2xl hidden">
                   <h2 className="text-white ">Learn more</h2>
                 </button>
               </div>
@@ -161,9 +164,11 @@ export default function Home() {
               <Image
                 src={imageUrl}
                 alt="Description of image"
-                width={500} // Desired width in pixels
-                height={300} // Desired height in pixels
-                className="hidden md:block  rounded-lg my-auto"
+                width={0}
+                height={0}
+                sizes="100vw"
+                style={{ width: "100%", height: "auto" }} // optional
+                className="object-cover"
               />
             </div>
           </>
@@ -174,9 +179,11 @@ export default function Home() {
               <Image
                 src={imageUrl}
                 alt="Description of image"
-                width={500} // Desired width in pixels
-                height={300} // Desired height in pixels
-                className="hidden md:block  rounded-lg my-auto"
+                width={0}
+                height={0}
+                sizes="100vw"
+                style={{ width: "100%", height: "auto" }} // optional
+                className="object-cover"
               />
             </div>
 
@@ -184,8 +191,8 @@ export default function Home() {
               <div>
                 <h1 className="font-extrabold pb-5 text-5xl">{title} </h1>
                 <h3 className="  pb-8 sm:text-2xl md:text-lg">{sub}</h3>
-                <button className="bg-black p-5 rounded-md sm:text-lg md:text-2xl ">
-                  <h2 className="text-white ">Learn more</h2>
+                <button className="bg-black p-5 rounded-md sm:text-lg md:text-2xl hidden ">
+                  <h2 className="text-white   ">Learn more</h2>
                 </button>
               </div>
             </div>
@@ -195,18 +202,54 @@ export default function Home() {
     );
   }
 
+  function MobileSection({ title, sub, imageUrl }: SectionProp) {
+    return (
+      <section className="  h-200  z-30 w-screen  flex justify-between  align-center  bg-stone-100 flex flex-col sm:flex-row  ">
+        <div className="sm:basis-1 md:basis-1/2 p-20  flex flex-col  justify-center">
+          <div>
+            <h1 className="font-extrabold pb-5 text-5xl">{title} </h1>
+            <h3 className="  pb-8 sm:text-2xl md:text-lg">{sub}</h3>
+            <button className="bg-black p-5 rounded-md sm:text-lg md:text-2xl hidden">
+              <h2 className="text-white ">Learn more</h2>
+            </button>
+          </div>
+        </div>
+        <div className="sm:basis-0 md:basis-1/2 bg-stone-200 flex justify-center ">
+          <Image
+            src={imageUrl}
+            alt="Description of image"
+            width={0}
+            height={0}
+            sizes="100vw"
+            style={{ width: "100%", height: "auto" }} // optional
+            className="object-cover"
+          />
+        </div>
+      </section>
+    );
+  }
+
   function SectionList(): JSX.Element {
     return (
       <>
-        {sectionContent.map((section, index) => (
-          <Section
-            key={index}
-            title={section.title}
-            sub={section.sub}
-            imageUrl={section.imageUrl}
-            isEven={index % 2 === 1}
-          />
-        ))}
+        {sectionContent.map((section, index) =>
+          isMobile ? (
+            <MobileSection
+              key={index}
+              title={section.title}
+              sub={section.sub}
+              imageUrl={section.imageUrl}
+            />
+          ) : (
+            <DesktopSection
+              key={index}
+              title={section.title}
+              sub={section.sub}
+              imageUrl={section.imageUrl}
+              isEven={index % 2 === 1}
+            />
+          )
+        )}
       </>
     );
   }
@@ -246,14 +289,16 @@ export default function Home() {
           <ambientLight intensity={2.2} />
           <directionalLight position={[1.0, 2.0, 0.0]} />
 
-          <Set cameraState={cameraState}  isMobile={isMobile}/>
+          <Set cameraState={cameraState} isMobile={isMobile} />
           <mesh
             scale={100}
             rotation={[-Math.PI / 2, 0, 0]}
             position={[0.0, -0.1, 0.0]}
           >
             {/* <meshStandardMaterial color={"#e0e0e0"} />   */}
-            <meshStandardMaterial color={"grey"} />
+            {/* <meshStandardMaterial color={"grey"} /> */}
+            <meshStandardMaterial color={"#7292a0"} />
+
             <planeGeometry></planeGeometry>
           </mesh>
         </Canvas>
@@ -264,11 +309,11 @@ export default function Home() {
         <footer className="bg-black text-white py-6 h-fit z-30 w-screen">
           <div className="container mx-auto px-8">
             <div className="flex justify-between items-center">
-              <div className="text-sm">
+              <div className="text-xs md:text-sm">
                 © {new Date().getFullYear()} Twinmatrix Technologies. All rights
                 reserved.
               </div>
-              <div className="flex space-x-4">
+              <div className="flex space-x-4 text-xs md:text-sm">
                 <Link href="/about">About</Link>
                 <Link href="/contact">Contact</Link>
                 <Link href="/privacy">Privacy Policy</Link>

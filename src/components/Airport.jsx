@@ -28,7 +28,7 @@ export default function Airport({props,cameraState}) {
 };
 
   useEffect(() => {
-    if (cameraState === 1) {
+    if (cameraState === 2) {
        revealAirport()
     }  
      else{

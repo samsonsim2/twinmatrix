@@ -22,7 +22,7 @@ export default function AirportBase(props) {
         geometry={nodes.AirportBase.geometry}
         position={[0,0.05,0]}
         scale={0.25}
-      ><meshBasicMaterial color={"grey"} side={DoubleSide}/>
+      ><meshBasicMaterial color={"#7292a0"} side={DoubleSide}/>
       </mesh>
     </group>
   )

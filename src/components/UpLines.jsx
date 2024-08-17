@@ -11,7 +11,7 @@ uniform float opacity;
  
  
 void main() {
-  vec3 blue = vec3(1,0, 0);   
+  vec3 blue = vec3(0.224, 0.376, 1);   
   float speed = 8.0;
   float sinWave = step(0.5,abs(sin(-vUvs.x * 50.0 + (u_time * speed)) - 1.)) ;
   vec3 color = vec3(sinWave) * blue;

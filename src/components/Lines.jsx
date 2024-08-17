@@ -56,7 +56,7 @@ export default function Lines({props,cameraState}) {
   };
   
     useEffect(() => {
-      if (cameraState === 1) {
+      if (cameraState === 2) {
          revealAirport()
       
       }  

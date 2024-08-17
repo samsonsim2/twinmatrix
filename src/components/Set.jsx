@@ -44,14 +44,14 @@ export default function Set({ cameraState, isMobile }) {
         console.log(size.width)
         gsap.to(mesh.current.position, {
             x: isMobile ? 2 : 5,
-            z: isMobile ? 10.5: 20, // 45 degrees in radians
+            z: isMobile ? 5 : 14, // 45 degrees in radians
             duration: 2,
             ease: "power1.inOut",
         });
         gsap.to(mesh.current.scale, {
-            x: isMobile ? 1.2 : 1.5,
-            y: isMobile ? 1.2 : 1.5,
-            z: isMobile ? 1.2 : 1.55, // 45 degrees in radians
+            x: isMobile ? 1.3 : 1.5,
+            y: isMobile ? 1.3 : 1.5,
+            z: isMobile ? 1.3 : 1.55, // 45 degrees in radians
             duration: 2,
             ease: "power1.inOut",
         });
@@ -92,11 +92,12 @@ export default function Set({ cameraState, isMobile }) {
 
     useEffect(() => {
         if (cameraState === 1) {
-            navigateAirport()
-        } else {
             navigateHome()
 
-        }
+        } else if(cameraState === 2) {
+            navigateAirport()
+
+        } 
 
     }, [cameraState])
 
@@ -114,7 +115,7 @@ export default function Set({ cameraState, isMobile }) {
     useEffect(() => {
 
         if (!isMobile) {
-            setGlobalScale(0.1)
+            setGlobalScale(0.05)
 
         } else {
             setGlobalScale(1.4)
@@ -137,8 +138,8 @@ export default function Set({ cameraState, isMobile }) {
 
     const spriteSize = 0.6
     return <>
-    <OrbitControls enableZoom={false} enablePan={false} enableOrbit={true} enableRotate={false} maxPolarAngle={0} minPolarAngle={Math.PI / 3} />
- 
+        <OrbitControls enableZoom={false} enablePan={false} enableOrbit={true} enableRotate={false} maxPolarAngle={0} minPolarAngle={Math.PI / 3} />
+
 
         <OrthographicCamera
             ref={cameraRef}
@@ -154,9 +155,9 @@ export default function Set({ cameraState, isMobile }) {
             scale={1}
         />
 
-        <mesh ref={mesh} position={[0, 0, 0]}>
+        <mesh ref={mesh}   >
 
-            <group scale={isMobile ? 1 : 1.4}>
+            <group scale={isMobile ? 0.8 : 1.4} position={isMobile?[0,0,3]:[0,0,0]}>
 
                 <Grass />
                 <Traffic />
@@ -166,7 +167,6 @@ export default function Set({ cameraState, isMobile }) {
                 <Planes />
                 <AnimatedPlane />
                 <Lines cameraState={cameraState} />
-
                 <Base />
                 <Airport cameraState={cameraState} />
                 <Buildings />
@@ -174,85 +174,11 @@ export default function Set({ cameraState, isMobile }) {
                 <Collaboration />
                 <AirportBase />
                 <Furniture />
-                <UpLines/>
-                 
+                <UpLines />
+
             </group>
 
-
-            {/* <SpriteAnimator
-
-                position={[-3.0, 2.4,-1.5]}
-                scale={spriteSize}
-
-                startFrame={0}
-                scaleFactor={0.01}
-                autoPlay={true}
-                loop={true}
-                numberOfFrames={1}
-                textureImageURL={'/textures/Icons-01.png'}
-            />
-            <SpriteAnimator
-                position={[5.0, 2.4, -10]}
-                scale={spriteSize}
-
-                startFrame={0}
-                scaleFactor={0.01}
-                autoPlay={true}
-                loop={true}
-                numberOfFrames={1}
-                textureImageURL={'/textures/Icons-01.png'}
-            />
-            <SpriteAnimator
-                position={[0.0, 2.4, 8.0]}
-                scale={spriteSize}
-                startFrame={0}
-                scaleFactor={0.01}
-                autoPlay={true}
-                loop={true}
-                numberOfFrames={1}
-                textureImageURL={'/textures/Icons-01.png'}
-            />
-            <SpriteAnimator
-                position={[-2.0, 2.4, 4.0]}
-                scale={spriteSize}
-                startFrame={0}
-                scaleFactor={0.01}
-                autoPlay={true}
-                loop={true}
-                numberOfFrames={1}
-                textureImageURL={'/textures/Icons-02.png'}
-            />
-            <SpriteAnimator
-                position={[7.0, 2.4, 4.0]}
-                scale={spriteSize}
-                startFrame={0}
-                scaleFactor={0.01}
-                autoPlay={true}
-                loop={true}
-                numberOfFrames={1}
-                textureImageURL={'/textures/Icons-03.png'}
-            />
-            <SpriteAnimator
-                position={[-6.5, 2.0, -3]}
-                scale={spriteSize}
-                startFrame={0}
-                scaleFactor={0.01}
-                autoPlay={true}
-                loop={true}
-                numberOfFrames={1}
-                textureImageURL={'/textures/Icons-04.png'}
-            />
-            <SpriteAnimator
-                position={[-8.5, 2.0, 7]}
-                scale={spriteSize}
-
-                startFrame={0}
-                scaleFactor={0.01}
-                autoPlay={true}
-                loop={true}
-                numberOfFrames={1}
-                textureImageURL={'/textures/Icons-04.png'}
-            /> */}
+ 
         </mesh>
 
     </>
