@@ -65,8 +65,8 @@ float map(float value, float min1, float max1, float min2, float max2) {
 }
 void main(void) {
     
-    vec3 colorB =  vec3(1, 0, 0);
-    vec3 colorA = vec3(1,1,0);
+    vec3 colorB =  vec3(1, 0.576, 0.576);
+    vec3 colorA = vec3(1, 0.835, 0.282);
 
     vec3 coords = vec3(vUvs * 10.0, time * 0.4); 
     float noiseSample = 0.0;
@@ -86,8 +86,10 @@ void main(void) {
 
     vec3 color = mix(colorA,colorB,vec3(noiseSample));
 
+    color += abs(noiseSample-1.0);
+
  
-    gl_FragColor = vec4(color, noiseSample * 0.3);
+    gl_FragColor = vec4(color,1.0);
 } 
 `
 
@@ -121,15 +123,15 @@ export default function AirportPlan(props) {
     });
 
     return (
-        <group {...props} dispose={null}       position={[0.0, 0.15, 0.0]}>
-            <mesh
+        <group {...props} dispose={null}       position={[0.0,0.1, 0.0]}>
+            {/* <mesh
                 castShadow
                 receiveShadow
                 geometry={nodes['AirportPlan-Mat2'].geometry}
 
                 scale={0.25}
 
-            ><meshBasicMaterial   color={"white"} renderOrder={0} /></mesh>
+            ><meshBasicMaterial   color={"white"} renderOrder={0} /></mesh> */}
 
             <mesh
                 castShadow
@@ -137,7 +139,7 @@ export default function AirportPlan(props) {
                 geometry={nodes['AirportPlan-Mat2'].geometry}
                 ref={mesh}
                 scale={0.25}
-                position={[0.0, 0.01, 0.0]}
+                position={[0.0, 0.0, 0.0]}
 
             ><shaderMaterial fragmentShader={fragmentShader} vertexShader={vertexShader} uniforms={uniforms} transparent={true} emissiveIntensity={10.0} depthWrite={false} renderOrder={1}   /></mesh>
         </group>
