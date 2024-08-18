@@ -121,7 +121,7 @@ export default function AirportPlan(props) {
     });
 
     return (
-        <group {...props} dispose={null}       position={[0.0, 0.3, 0.0]}>
+        <group {...props} dispose={null}       position={[0.0, 0.15, 0.0]}>
             <mesh
                 castShadow
                 receiveShadow
