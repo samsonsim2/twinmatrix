@@ -129,7 +129,7 @@ export default function AirportPlan(props) {
 
                 scale={0.25}
 
-            ><meshBasicMaterial   color={"white"}/></mesh>
+            ><meshBasicMaterial   color={"white"} renderOrder={0} /></mesh>
 
             <mesh
                 castShadow
@@ -139,7 +139,7 @@ export default function AirportPlan(props) {
                 scale={0.25}
                 position={[0.0, 0.01, 0.0]}
 
-            ><shaderMaterial fragmentShader={fragmentShader} vertexShader={vertexShader} uniforms={uniforms} transparent={true} emissiveIntensity={10.0} depthWrite={false}   /></mesh>
+            ><shaderMaterial fragmentShader={fragmentShader} vertexShader={vertexShader} uniforms={uniforms} transparent={true} emissiveIntensity={10.0} depthWrite={false} renderOrder={1}   /></mesh>
         </group>
     )
 }
