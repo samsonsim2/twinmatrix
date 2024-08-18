@@ -126,7 +126,7 @@ export default function Heatmap2(props) {
         mesh.current.material.uniforms.u_time.value = clock.getElapsedTime();
     });
     return (
-        <group {...props} dispose={null} scale={0.25} position={[0.0,0.1,0.0]}>
+        <group {...props} dispose={null} scale={0.25} position={[0.0,0.05,0.0]}>
             <mesh
                 ref={mesh}
                 castShadow

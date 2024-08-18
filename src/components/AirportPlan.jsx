@@ -65,8 +65,8 @@ float map(float value, float min1, float max1, float min2, float max2) {
 }
 void main(void) {
     
-    vec3 colorB =  vec3(1, 0.576, 0.576);
-    vec3 colorA = vec3(1, 0.835, 0.282);
+    vec3 colorB =  vec3(1, 0.706, 0.706);
+    vec3 colorA = vec3(1, 0.412, 0);
 
     vec3 coords = vec3(vUvs * 10.0, time * 0.4); 
     float noiseSample = 0.0;
@@ -141,7 +141,7 @@ export default function AirportPlan(props) {
                 scale={0.25}
                 position={[0.0, 0.0, 0.0]}
 
-            ><shaderMaterial fragmentShader={fragmentShader} vertexShader={vertexShader} uniforms={uniforms} transparent={true} emissiveIntensity={10.0} depthWrite={false} renderOrder={1}   /></mesh>
+            ><shaderMaterial fragmentShader={fragmentShader} vertexShader={vertexShader} uniforms={uniforms} transparent={true} emissiveIntensity={10.0}   /></mesh>
         </group>
     )
 }
