@@ -8,7 +8,7 @@ import * as dat from "dat.gui";
 import * as THREE from "three";
  
 
-
+let gui;
 export default function Streets(props) {
     const streets = useRef()
     const geometryBaseColor = {
@@ -19,30 +19,31 @@ export default function Streets(props) {
     const uniforms= { 
       color: { value: new THREE.Color(geometryBaseColor.hex) }
     }
-    let gui;
+   
 
     
     const init = async () => {
         const dat = await import('dat.gui')
         if (!gui) {
            gui = new dat.GUI()
+           const colorFolder = gui.addFolder("Streets") 
+           const streetsColor = colorFolder.addColor(geometryBaseColor, "color")
+         streetsColor.onChange((value) => {
+             streets.current.material.color = new THREE.Color(value)
+           })
+       
+        
+       
+           return () => {
+             gui.destroy()
+           }
            // ... rest of the three.js code
         }
      }
     useEffect(() => {
         init()
    
-      const colorFolder = gui.addFolder("Streets") 
-      const streetsColor = colorFolder.addColor(geometryBaseColor, "color")
-    streetsColor.onChange((value) => {
-        streets.current.material.color = new THREE.Color(value)
-      })
-  
-   
-  
-      return () => {
-        gui.destroy()
-      }
+    
     }, []);
 
     return (
