@@ -311,8 +311,8 @@ export default function Home() {
           <directionalLight position={[1.0, 2.0, 0.0]} />
 
           {/* <Set cameraState={cameraState} isMobile={isMobile}  isWide={isWide}/>
-          <Streets/> */}
-
+         */}
+  <Streets/>
  
           
         </Canvas>
