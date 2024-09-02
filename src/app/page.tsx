@@ -310,8 +310,8 @@ export default function Home() {
           <ambientLight intensity={2.2} />
           <directionalLight position={[1.0, 2.0, 0.0]} />
 
-          <Set cameraState={cameraState} isMobile={isMobile}  isWide={isWide}/>
-          <Streets/>
+          {/* <Set cameraState={cameraState} isMobile={isMobile}  isWide={isWide}/>
+          <Streets/> */}
 
  
           
