@@ -21,12 +21,14 @@ export default function Streets(props) {
     }
     let gui;
 
+    
     const init = async () => {
-          gui =new GUI({
-            width : 100
-        }); 
-    }
-   
+        const dat = await import('dat.gui')
+        if (!gui) {
+           gui = new dat.GUI()
+           // ... rest of the three.js code
+        }
+     }
     useEffect(() => {
         init()
    
