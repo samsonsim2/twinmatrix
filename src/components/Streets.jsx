@@ -39,20 +39,7 @@ export default function Streets(props) {
                     gui.destroy()
                 }
             })
-        } else {
-            const gui = new GUI()
-            const colorFolder = gui.addFolder("Streets")
-            const streetsColor = colorFolder.addColor(geometryBaseColor, "color")
-            streetsColor.onChange((value) => {
-                base.current.material.color = new THREE.Color(value)
-            })
-
-
-
-            return () => {
-                gui.destroy()
-            }
-        }
+        }  
     }, []);
 
     return (
