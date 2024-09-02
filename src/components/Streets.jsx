@@ -19,14 +19,13 @@ export default function Streets(props) {
     const uniforms = {
         color: { value: new THREE.Color(geometryBaseColor.hex) }
     }
-
+ 
 
     useEffect(() => {
-        console.log(window)
 
-        if (  window == undefined) {
+        if (typeof window === "undefined") {
             // Dynamically import dat.gui
-            import('dat.gui').then((dat) => {
+            import('dat.gui').then((dat) => { 
                 const gui = new dat.GUI()
                 const colorFolder = gui.addFolder("Streets")
                 const streetsColor = colorFolder.addColor(geometryBaseColor, "color")
@@ -39,7 +38,7 @@ export default function Streets(props) {
                 return () => {
                     gui.destroy()
                 }
-             })
+            })
         } else {
             const gui = new GUI()
             const colorFolder = gui.addFolder("Streets")

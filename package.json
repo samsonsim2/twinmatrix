@@ -24,6 +24,7 @@
     "npm-check-updates": "^16.14.20",
     "npx": "^10.2.2",
     "react": "^18",
+    "react-dat-gui": "^4.1.1",
     "react-dom": "^18",
     "three": "^0.166.1"
   },
