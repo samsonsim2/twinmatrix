@@ -15,6 +15,8 @@ import Platforms from "@/components/Platforms";
 import Buildings from "@/components/Buildings";
 import Test from "@/components/Test";
 import Icons from "@/components/Icons";
+import Box from "@/components/Box";
+import Streets from "@/components/Streets";
 import Lines from "@/components/Lines";
 import Heatmap from "@/components/Heatmap";
 import ContactForm from "@/components/ContactForm";
@@ -26,6 +28,8 @@ import emailjs from "@emailjs/browser";
 import LocalAirportIcon from "@mui/icons-material/LocalAirport";
 import LocationCityIcon from "@mui/icons-material/LocationCity";
 import useWindowSize from "@/hooks/useWindowSize";
+ 
+ 
 import {
   Bloom,
   DepthOfField,
@@ -34,6 +38,7 @@ import {
   Vignette,
 } from "@react-three/postprocessing";
 import Link from "next/link";
+import GUIThreeHexColor from "@/types/GUIThreeHexColor";
 export default function Home() {
   const buttonRef = useRef(null);
   const cameraRef = useRef(null);
@@ -42,8 +47,10 @@ export default function Home() {
   const [isWide, setIsWide] = useState(false);
   const [cameraState, setCameraState] = useState(1);
   const size = useWindowSize();
-  
+ 
 
+  // Color
+ 
   useEffect(() => {
     console.log("change size");
     console.log(size)
@@ -263,9 +270,14 @@ export default function Home() {
     );
   }
 
+
+  const [color, setColor] = useState('#ff0000');
+ 
+
+ 
   return (
     <main className="h-screen w-screen relative overflow-x-hidden bg-stone-100 ">
-      <section className="  absolute top-0 z-30 w-full flex justify-between pt-2 px-5 bg-gradient-to-b from-white to-transparent ">
+      {/* <section className="  absolute top-0 z-30 w-full flex justify-between pt-2 px-5 bg-gradient-to-b from-white to-transparent ">
         <div>
           <h2 className="font-bold">TMT</h2>
         </div>
@@ -277,7 +289,7 @@ export default function Home() {
         <div className="bg-black p-2 rounded-md text-xs  ">
           <h2 className="text-white">Book a demo</h2>
         </div>
-      </section>
+      </section> */}
 
       <div className="absolute z-30 bottom-0   w-full flex flex-col   ">
         <div className="flex flex-row px-8 gap-4">
@@ -299,17 +311,10 @@ export default function Home() {
           <directionalLight position={[1.0, 2.0, 0.0]} />
 
           <Set cameraState={cameraState} isMobile={isMobile}  isWide={isWide}/>
-          <mesh
-            scale={100}
-            rotation={[-Math.PI / 2, 0, 0]}
-            position={[0.0, -0.5, 0.0]}
-          >
-            {/* <meshStandardMaterial color={"#e0e0e0"} />   */}
-            {/* <meshStandardMaterial color={"grey"} /> */}
-            <meshStandardMaterial color={"#7292a0"} />
+          <Streets/>
 
-            <planeGeometry></planeGeometry>
-          </mesh>
+ 
+          
         </Canvas>
 
         <SectionList />

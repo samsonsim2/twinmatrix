@@ -1,7 +1,8 @@
-import React, { useMemo, useRef } from 'react'
+import React, { useEffect, useMemo, useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
-
+import { GUI } from 'dat.gui'
+import * as THREE from "three";
 const fragmentShader = `
 
 vec3 hash( vec3 p ) // replace this by something better
@@ -36,6 +37,8 @@ float noise( in vec3 p )
 
 varying vec2    vUvs;
 uniform float u_time;
+uniform vec3 color1;
+uniform vec3 color2;
  
 float fbm(vec3 p, int octaves, float persistence, float lacunarity){
     float amplitude = 0.01;
@@ -63,8 +66,8 @@ float map(float value, float min1, float max1, float min2, float max2) {
 void main(void) {
     
     //Option1 Original
-    vec3 colorB =  vec3(1, 0.655, 0);
-    vec3 colorA = vec3(1,1,0);
+    vec3 colorB =  color2;
+    vec3 colorA = color1;
 
 
         
@@ -113,11 +116,41 @@ void main() {
 export default function Heatmap2(props) {
     const { nodes, materials } = useGLTF('/models/Heatmap2.gltf')
     const mesh = useRef();
+ 
+    const geometryBaseColor = {
+        color1:  "#ffd400",
+        color2:  "#ffff00",
+       
+      }
+ 
+  useEffect(() => {
+    const gui =new GUI({
+        width : 100
+    }); 
+    const colorFolder = gui.addFolder("IrradianceMap") 
+    const irradianceColor1 = colorFolder.addColor(geometryBaseColor, "color1")
+    irradianceColor1.onChange((value) => {
+     mesh.current.material.uniforms.color1.value = new THREE.Color(value)
+    })
+
+    const irradianceColor2 = colorFolder.addColor(geometryBaseColor, "color2")
+    irradianceColor2.onChange((value) => {
+     mesh.current.material.uniforms.color2.value = new THREE.Color(value)
+    })
+ 
+
+    return () => {
+      gui.destroy()
+    }
+  }, []);
     const uniforms = useMemo(
         () => ({
             u_time: {
                 value: 0.0,
             },
+            color1: { value:new THREE.Color( 0xffd400 )},
+            
+            color2: { value:new THREE.Color( 0xffff00 )}
 
         }), []
     );

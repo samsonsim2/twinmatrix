@@ -176,7 +176,7 @@ export default function Set({ cameraState, isMobile, isWide }) {
                 <Buildings />
                 <Heatmap2 />
                 <Collaboration />
-                <AirportBase />
+                {/* <AirportBase /> */}
                 <Furniture />
                 <UpLines />
 

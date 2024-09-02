@@ -1,10 +1,13 @@
-import React, { useMemo, useRef } from 'react'
+import React, { useEffect, useMemo, useRef } from 'react'
 import { SpriteAnimator, useGLTF } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber';
-
+import { GUI } from 'dat.gui'
+import * as THREE from "three";
+ 
 const fragmentShader = `
 varying vec2 vUvs; 
 uniform float u_time;
+uniform vec3 collabColor;
  
  
  
@@ -15,7 +18,7 @@ void main() {
 
 
   //option 2 yellow
-  vec3 colorA = vec3(0.224, 0.376, 1);
+  vec3 colorA = collabColor;
 
 
 
@@ -28,22 +31,7 @@ void main() {
 }
 
 `;
-// const fragmentShader = `
-// varying vec2 vUvs; 
-// uniform float u_time;
-
-
-
-// void main() {
-//   vec3 blue = vec3(0.784, 0.314, 1);   
-//   float speed = 4.0;
-//   float sinWave = step(0.5,abs(sin(vUvs.x * 50.0 + (u_time * speed)) - 1.)) ;
-//   vec3 color = vec3(sinWave) * blue;
-
-//   gl_FragColor = vec4(color, sinWave * 0.4 );
-// }
-
-// `;
+ 
 const vertexShader = `
 varying vec2 vUvs; 
 void main() {
@@ -54,12 +42,39 @@ void main() {
 `
 export default function Collaboration(props) {
     const { nodes, materials } = useGLTF('/models/Collaboration.gltf')
+
+
+    const geometryBaseColor = {
+        collabColor: "#ff0000",
+
+    }
+
+
+
+
     const mesh = useRef();
+    useEffect(() => {
+        const gui = new GUI({
+            width: 100
+        });
+        const colorFolder = gui.addFolder("Collaboration")
+        const collaborationColor = colorFolder.addColor(geometryBaseColor, "collabColor")
+        collaborationColor.onChange((value) => {
+            mesh.current.material.uniforms.collabColor.value = new THREE.Color(value)
+        })
+
+
+
+        return () => {
+            gui.destroy()
+        }
+    }, []);
     const uniforms = useMemo(
         () => ({
             u_time: {
                 value: 0.0,
             },
+            collabColor: { value: new THREE.Color(geometryBaseColor.collabColor) }
 
         }), []
     );
@@ -71,7 +86,7 @@ export default function Collaboration(props) {
         <group {...props} dispose={null} scale={0.25}>
 
             <SpriteAnimator
-                position={[-2.6,  7.2, 0.2]}
+                position={[-2.6, 7.2, 0.2]}
 
                 scale={1.5}
                 startFrame={0}
@@ -105,7 +120,7 @@ export default function Collaboration(props) {
             />
 
             <SpriteAnimator
-                position={[-15.2,  7.2, -14.5]}
+                position={[-15.2, 7.2, -14.5]}
 
                 scale={1.5}
                 startFrame={0}

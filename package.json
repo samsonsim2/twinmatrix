@@ -19,6 +19,7 @@
     "@react-three/fiber": "^8.16.8",
     "@react-three/postprocessing": "^2.16.2",
     "axios": "^1.7.3",
+    "dat.gui": "^0.7.9",
     "next": "14.0.1",
     "npm-check-updates": "^16.14.20",
     "npx": "^10.2.2",

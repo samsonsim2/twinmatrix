@@ -1,8 +1,11 @@
 
-import React, { useRef, useMemo } from 'react'
+import React, { useRef, useMemo, useEffect } from 'react'
 import { useGLTF } from '@react-three/drei'
 import { DoubleSide } from 'three'
 import { useFrame } from '@react-three/fiber';
+import { GUI } from 'dat.gui'
+import * as THREE from "three";
+ 
 const fragmentShader = `
 // uniform vec2 resolution;
 // uniform int numRows;
@@ -10,6 +13,7 @@ float speed=3.0;
 uniform float u_time;
 int numRows = 900; 
 varying vec2 vUvs;
+uniform vec3 trafficColor;
 
 // Function to generate a hash value based on a float input
 float random(float x) {
@@ -37,7 +41,7 @@ void main() {
 
     // // option2-light purple
   vec3 colorB =  vec3(1.0,1.0,1.0);
-  vec3 colorA = vec3(0.875, 0.635, 1);
+  vec3 colorA = trafficColor;
   
   // vec3 colorA = vec3(0.867, 0.639, 1);
 
@@ -95,11 +99,35 @@ void main() {
 export default function Traffic(props) {
   const { nodes, materials } = useGLTF('/models/Traffic.gltf')
   const mesh = useRef();
+  const geometryBaseColor = {
+    trafficColor:  "#f2d8ff",
+ 
+   
+  }
+
+useEffect(() => {
+  const gui =new GUI({
+    width : 100
+}); 
+const colorFolder = gui.addFolder("Traffic") 
+const trafficColor = colorFolder.addColor(geometryBaseColor, "trafficColor")
+trafficColor.onChange((value) => {
+ mesh.current.material.uniforms.trafficColor.value = new THREE.Color(value)
+})
+
+ 
+
+
+return () => {
+  gui.destroy()
+}
+}, []);
   const uniforms = useMemo(
     () => ({
       u_time: {
         value: 0.0,
       },
+      trafficColor: { value:new THREE.Color( 0xf2d8ff )},
 
     }), []
   );
