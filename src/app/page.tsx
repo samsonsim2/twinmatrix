@@ -15,7 +15,7 @@ import Platforms from "@/components/Platforms";
 import Buildings from "@/components/Buildings";
 import Test from "@/components/Test";
 import Icons from "@/components/Icons";
-import Box from "@/components/Box";
+ 
 import Streets from "@/components/Streets";
 import Lines from "@/components/Lines";
 import Heatmap from "@/components/Heatmap";
