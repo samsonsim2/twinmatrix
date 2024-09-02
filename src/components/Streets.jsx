@@ -22,8 +22,9 @@ export default function Streets(props) {
 
 
     useEffect(() => {
+        console.log(window)
 
-        if (typeof window !== 'undefined') {
+        if (  window == undefined) {
             // Dynamically import dat.gui
             import('dat.gui').then((dat) => {
                 const gui = new dat.GUI()
