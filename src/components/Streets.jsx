@@ -6,64 +6,56 @@ import React, { useEffect, useMemo, useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 import { GUI } from 'dat.gui'
 import * as THREE from "three";
- 
+import dynamic from 'next/dynamic';
 import { useControls } from 'leva'
 
+const dat = dynamic(() => import('dat.gui'), { ssr: false });
 export default function Streets(props) {
-    const streets = useRef()
-    const geometryBaseColor = {
-        color: "#7292a0",
+  const streets = useRef()
+  const geometryBaseColor = {
+    color: "#7292a0",
 
+  }
+
+
+
+  useEffect(() => {
+
+    if (typeof window !== 'undefined') {
+      const gui = new GUI({
+        width: 100
+      });
+      const colorFolder = gui.addFolder("Streets")
+      const streetsColor = colorFolder.addColor(geometryBaseColor, "color")
+      streetsColor.onChange((value) => {
+        streets.current.material.color = new THREE.Color(value)
+      })
+
+      return () => {
+        gui.destroy()
+      }
     }
 
-    const options = useMemo(() => {
-        return {
-        
-          color: { value: 'lime' },
-        }
-      }, [])
-    
-      const pA = useControls('street', options)
+ 
+  }, [window]);
 
-    // useEffect(() => {
+  return (
+    <>
+      <mesh
+        scale={100}
+        rotation={[-Math.PI / 2, 0, 0]}
+        position={[0.0, -0.5, 0.0]}
+        ref={streets}
 
-       
-    //         import('dat.gui').then((dat) => { 
-    //             const gui = new dat.GUI()
-    //             const colorFolder = gui.addFolder("Streets")
-    //             const streetsColor = colorFolder.addColor(geometryBaseColor, "color")
-    //             streetsColor.onChange((value) => {
-    //                streets.current.material.color = new THREE.Color(value)
-    //             })
-    
-    
-    
-    //             return () => {
-    //                 gui.destroy()
-    //             }
-    //         })
-     
-    // }, []);
-    const color = useControls({
-        value: 'green',
-      })
-    return (
-        <> 
-        <mesh
-            scale={100}
-            rotation={[-Math.PI / 2, 0, 0]}
-            position={[0.0, -0.5, 0.0]}
-            ref={streets}
+      >
+        {/* <meshStandardMaterial color={"#e0e0e0"} />   */}
+        {/* <meshStandardMaterial color={"grey"} /> */}
+        <meshStandardMaterial color={"#7292a0"} />
 
-        >
-            {/* <meshStandardMaterial color={"#e0e0e0"} />   */}
-            {/* <meshStandardMaterial color={"grey"} /> */}
-            <meshStandardMaterial color={pA.color} />
+        <planeGeometry></planeGeometry>
+      </mesh></>
 
-            <planeGeometry></planeGeometry>
-        </mesh></>
-        
-    );
+  );
 }
 
 
